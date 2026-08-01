@@ -1,0 +1,127 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- PHASE 3: Primitives ---
+    function isSignedIn() { return request.auth != null; }
+    function isActualOwner() {
+      return isSignedIn() 
+        && request.auth.token.email == 'nhrafi1x@gmail.com' 
+        && request.auth.token.email_verified == true;
+    }
+    function isOwner(userId) { return isSignedIn() && request.auth.uid == userId; }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    
+    // --- Validation Helpers ---
+
+    function isValidPost(data) {
+      return data.keys().hasAll(['title', 'content', 'userId'])
+        && data.userId == request.auth.uid
+        && data.title is string && data.title.size() <= 300
+        && data.content is string && data.content.size() <= 20000
+        && (!('imageUrl' in data) || (data.imageUrl is string && data.imageUrl.size() <= 1000))
+        && (!('tags' in data) || data.tags is list)
+        && (!('createdAt' in data) || data.createdAt is timestamp);
+    }
+
+    function isValidTodo(data) {
+      return data.keys().hasAll(['userId', 'text'])
+        && data.userId == request.auth.uid
+        && data.text is string && data.text.size() <= 500
+        && (!('priority' in data) || data.priority in ['High', 'Medium', 'Low'])
+        && (!('completed' in data) || data.completed is bool)
+        && (!('order' in data) || data.order is int || data.order is float)
+        && (!('createdAt' in data) || data.createdAt is int || data.createdAt is float || data.createdAt is timestamp);
+    }
+
+    function isValidApplication(data) {
+      return data.keys().hasAll(['userId', 'company', 'role'])
+        && data.userId == request.auth.uid
+        && data.company is string && data.company.size() <= 200
+        && data.role is string && data.role.size() <= 200
+        && (!('date' in data) || data.date is string)
+        && (!('link' in data) || (data.link is string && data.link.size() <= 1000))
+        && (!('status' in data) || data.status in ['Applied', 'Interviewed', 'Offer', 'Rejected']);
+    }
+
+    function isValidNote(data) {
+      return data.keys().hasAll(['userId', 'title'])
+        && data.userId == request.auth.uid
+        && data.title is string && data.title.size() <= 200
+        && (!('url' in data) || (data.url is string && data.url.size() <= 1000))
+        && (!('content' in data) || (data.content is string && data.content.size() <= 10000))
+        && (!('createdAt' in data) || data.createdAt is timestamp);
+    }
+
+    function isValidContact(data) {
+      return data.keys().hasAll(['name', 'email', 'message'])
+        && data.name is string && data.name.size() <= 100
+        && data.email is string && data.email.size() <= 100
+        && data.message is string && data.message.size() <= 5000
+        && (!('subject' in data) || (data.subject is string && data.subject.size() <= 200))
+        && (!('createdAt' in data) || data.createdAt is timestamp);
+    }
+
+    // --- Rules for Collections ---
+
+    // Public Read-Only
+    match /projects/{id} { allow read: if true; }
+    match /research/{id} { allow read: if true; }
+    match /problemSolving/{id} { allow read: if true; }
+    match /photography/{id} { allow read: if true; }
+    match /cooking/{id} { allow read: if true; }
+    match /presentations/{id} { allow read: if true; }
+    match /freelanceHistory/{id} { allow read: if true; }
+
+    // Public Create
+    match /contacts/{contactId} {
+      allow create: if isValidId(contactId) && isValidContact(incoming());
+    }
+
+    // Private Write
+    match /todos/{todoId} {
+      allow get: if isValidId(todoId) && isActualOwner() && isOwner(existing().userId);
+      allow list: if isActualOwner() && resource.data.userId == request.auth.uid;
+      allow create: if isValidId(todoId) && isActualOwner() && isValidTodo(incoming());
+      allow update: if isActualOwner() && isOwner(existing().userId) && isValidTodo(incoming())
+                   && incoming().userId == existing().userId
+                   && (incoming().diff(existing()).affectedKeys().hasOnly(['text', 'priority', 'completed', 'order', 'createdAt']));
+      allow delete: if isActualOwner() && isOwner(existing().userId);
+    }
+
+    match /applications/{appId} {
+      allow get: if isValidId(appId) && isActualOwner() && isOwner(existing().userId);
+      allow list: if isActualOwner() && resource.data.userId == request.auth.uid;
+      allow create: if isValidId(appId) && isActualOwner() && isValidApplication(incoming());
+      allow update: if isActualOwner() && isOwner(existing().userId) && isValidApplication(incoming())
+                   && incoming().userId == existing().userId
+                   && (incoming().diff(existing()).affectedKeys().hasOnly(['company', 'role', 'date', 'link', 'status']));
+      allow delete: if isActualOwner() && isOwner(existing().userId);
+    }
+
+    match /notes/{noteId} {
+      allow get: if isValidId(noteId) && isActualOwner() && isOwner(existing().userId);
+      allow list: if isActualOwner() && resource.data.userId == request.auth.uid;
+      allow create: if isValidId(noteId) && isActualOwner() && isValidNote(incoming());
+      allow update: if isActualOwner() && isOwner(existing().userId) && isValidNote(incoming())
+                   && incoming().userId == existing().userId
+                   && (incoming().diff(existing()).affectedKeys().hasOnly(['title', 'url', 'content', 'createdAt']));
+      allow delete: if isActualOwner() && isOwner(existing().userId);
+    }
+
+    match /posts/{postId} {
+      allow get: if isValidId(postId);
+      allow list: if true;
+      allow create: if isValidId(postId) && isActualOwner() && isValidPost(incoming());
+      allow update: if isActualOwner() && isValidPost(incoming())
+                   && (incoming().diff(existing()).affectedKeys().hasOnly(['title', 'content', 'imageUrl', 'tags', 'createdAt']));
+      allow delete: if isActualOwner();
+    }
+  }
+}

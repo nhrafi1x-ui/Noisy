@@ -1,0 +1,66 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Public collections (Read-only for all, write for nobody via client - usually seeded or admin-managed)
+    // For this portfolio, we allow public read.
+    match /projects/{projectId} {
+      allow read: if true;
+    }
+    match /research/{researchId} {
+      allow read: if true;
+    }
+    match /problemSolving/{psId} {
+      allow read: if true;
+    }
+    match /photography/{photoId} {
+      allow read: if true;
+    }
+    match /cooking/{recipeId} {
+      allow read: if true;
+    }
+    match /presentations/{presId} {
+      allow read: if true;
+    }
+    match /freelanceHistory/{fhId} {
+      allow read: if true;
+    }
+
+    // Contact submissions: Create for anyone, Read/Update/Delete for nobody (admin only via console)
+    match /contacts/{contactId} {
+      allow create: if request.resource.data.keys().hasAll(['name', 'email', 'message'])
+                   && request.resource.data.name is string && request.resource.data.name.size() <= 100
+                   && request.resource.data.email is string && request.resource.data.email.size() <= 100
+                   && request.resource.data.message is string && request.resource.data.message.size() <= 5000;
+      allow read, update, delete: if false;
+    }
+
+    // Private planning collections
+    match /todos/{todoId} {
+      allow read, write: if isOwner(resource.data.userId || request.resource.data.userId);
+    }
+    match /applications/{appId} {
+      allow read, write: if isOwner(resource.data.userId || request.resource.data.userId);
+    }
+    match /notes/{noteId} {
+      allow read, write: if isOwner(resource.data.userId || request.resource.data.userId);
+    }
+  }
+}

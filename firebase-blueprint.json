@@ -1,0 +1,194 @@
+{
+  "entities": {
+    "project": {
+      "title": "Project",
+      "description": "Showcase project or website",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "techTags": { "type": "array", "items": { "type": "string" } },
+        "liveLink": { "type": "string" },
+        "repoLink": { "type": "string" },
+        "gallery": { "type": "array", "items": { "type": "string" } },
+        "featured": { "type": "boolean" }
+      },
+      "required": ["title", "description"]
+    },
+    "research": {
+      "title": "Research Paper",
+      "description": "Academic research paper or publication",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "authors": { "type": "string" },
+        "journal": { "type": "string" },
+        "status": { "type": "string", "enum": ["Published", "In Review", "Draft"] },
+        "abstract": { "type": "string" },
+        "pdfUrl": { "type": "string" },
+        "date": { "type": "string", "format": "date" }
+      },
+      "required": ["title", "authors", "journal"]
+    },
+    "problemSolving": {
+      "title": "Problem Solving",
+      "description": "Link to LeetCode/HackerRank solutions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "platform": { "type": "string" },
+        "title": { "type": "string" },
+        "difficulty": { "type": "string", "enum": ["Easy", "Medium", "Hard"] },
+        "solutionLink": { "type": "string" },
+        "summary": { "type": "string" }
+      },
+      "required": ["platform", "title", "difficulty"]
+    },
+    "photography": {
+      "title": "Photography",
+      "description": "A photograph in the gallery",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "url": { "type": "string" },
+        "category": { "type": "string" },
+        "camera": { "type": "string" },
+        "lens": { "type": "string" },
+        "settings": { "type": "string" },
+        "title": { "type": "string" }
+      },
+      "required": ["url", "category"]
+    },
+    "cooking": {
+      "title": "Recipe",
+      "description": "A culinary recipe",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "ingredients": { "type": "array", "items": { "type": "string" } },
+        "steps": { "type": "array", "items": { "type": "string" } },
+        "imageUrl": { "type": "string" },
+        "isChefSpecial": { "type": "boolean" },
+        "gallery": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["title", "ingredients", "steps"]
+    },
+    "presentation": {
+      "title": "Presentation",
+      "description": "Embedded Google Slides or documents",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "embedUrl": { "type": "string" },
+        "thumbnailUrl": { "type": "string" }
+      },
+      "required": ["title", "embedUrl"]
+    },
+    "freelanceHistory": {
+      "title": "Freelance Milestone",
+      "description": "Service record or earnings milestone",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "client": { "type": "string" },
+        "service": { "type": "string" },
+        "earnings": { "type": "number" },
+        "rating": { "type": "number" },
+        "date": { "type": "string", "format": "date" },
+        "badge": { "type": "string" }
+      },
+      "required": ["client", "service", "date"]
+    },
+    "contact": {
+      "title": "Contact Submission",
+      "description": "A message submitted via the contact form",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "subject": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "message"]
+    },
+    "todo": {
+      "title": "Todo Item",
+      "description": "Private planning todo",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "text": { "type": "string" },
+        "priority": { "type": "string", "enum": ["High", "Medium", "Low"] },
+        "completed": { "type": "boolean" },
+        "order": { "type": "number" }
+      },
+      "required": ["userId", "text"]
+    },
+    "application": {
+      "title": "Job Application",
+      "description": "Tracker entry for jobs/interviews",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "company": { "type": "string" },
+        "role": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "link": { "type": "string" },
+        "status": { "type": "string", "enum": ["Applied", "Interviewed", "Offer", "Rejected"] }
+      },
+      "required": ["userId", "company", "role"]
+    },
+    "note": {
+      "title": "Article Note",
+      "description": "Saved article or note",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "url": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title"]
+    },
+    "post": {
+      "title": "Blog Post",
+      "description": "An article for the My Thinking page",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string" }
+      },
+      "required": ["title", "content", "userId"]
+    }
+  },
+  "firestore": {
+    "projects": { "schema": "project", "description": "Public showcase projects" },
+    "research": { "schema": "research", "description": "Academic publications" },
+    "problemSolving": { "schema": "problemSolving", "description": "Coding platform stats" },
+    "photography": { "schema": "photography", "description": "Photography gallery" },
+    "cooking": { "schema": "cooking", "description": "Recipe collection" },
+    "presentations": { "schema": "presentation", "description": "Slide decks" },
+    "freelanceHistory": { "schema": "freelanceHistory", "description": "Work history milestones" },
+    "contacts": { "schema": "contact", "description": "Form submissions" },
+    "todos": { "schema": "todo", "description": "User specific todos" },
+    "applications": { "schema": "application", "description": "User specific job tracker" },
+    "notes": { "schema": "note", "description": "User specific notes" },
+    "posts": { "schema": "post", "description": "Public blog posts" }
+  }
+}
