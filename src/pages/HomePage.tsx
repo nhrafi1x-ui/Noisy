@@ -71,7 +71,7 @@ const HomePage = () => {
       </header>
 
       {/* Hero Slideshow */}
-      <section className="relative h-[80vh] overflow-hidden group">
+      <section className="relative h-[65vh] sm:h-[75vh] md:h-[80vh] overflow-hidden group rounded-sm">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -81,14 +81,14 @@ const HomePage = () => {
             transition={{ duration: 1.5, ease: "easeOut" }}
             className="absolute inset-0"
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-charcoal/20 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-charcoal/10 z-10" />
             <img 
               src={slides[currentSlide].image} 
               alt={slides[currentSlide].title} 
               className="w-full h-full object-cover transition-transform duration-[10000ms] scale-110 group-hover:scale-100"
             />
             
-            <div className="absolute bottom-12 left-12 right-12 z-20 flex flex-col items-start gap-4">
+            <div className="absolute bottom-6 left-4 right-12 sm:bottom-10 sm:left-8 sm:right-16 md:bottom-12 md:left-12 md:right-12 z-20 flex flex-col items-start gap-2 sm:gap-4">
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -100,7 +100,7 @@ const HomePage = () => {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="text-5xl md:text-7xl font-serif text-white max-w-2xl leading-tight"
+                className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-serif text-white max-w-2xl leading-tight"
               >
                 {slides[currentSlide].title}
               </motion.h1>
@@ -108,7 +108,7 @@ const HomePage = () => {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.7 }}
-                className="text-xl text-white/80 font-serif italic"
+                className="text-sm sm:text-lg md:text-xl text-white/80 font-serif italic line-clamp-2"
               >
                 {slides[currentSlide].subtitle}
               </motion.p>
@@ -117,27 +117,28 @@ const HomePage = () => {
         </AnimatePresence>
 
         {/* Sidebar Indicators */}
-        <div className="absolute right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-4">
+        <div className="absolute right-3 sm:right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-3 sm:gap-4">
           {slides.map((_, idx) => (
             <button 
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className="group relative flex items-center justify-end"
+              className="group relative flex items-center justify-end p-1"
+              aria-label={`Slide ${idx + 1}`}
             >
-              <span className={`h-px transition-all duration-500 bg-gold ${currentSlide === idx ? 'w-12' : 'w-4 opacity-30 group-hover:w-8 group-hover:opacity-100'}`} />
+              <span className={`h-px transition-all duration-500 bg-gold ${currentSlide === idx ? 'w-8 sm:w-12' : 'w-3 sm:w-4 opacity-40 group-hover:w-6 group-hover:opacity-100'}`} />
             </button>
           ))}
         </div>
       </section>
 
       {/* Intro Section */}
-      <section className="px-4">
+      <section className="px-2 sm:px-4">
         <div className="max-w-3xl">
           <motion.h2 
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl font-serif leading-tight mb-8"
+            className="text-2xl sm:text-4xl md:text-6xl font-serif leading-tight mb-6 sm:mb-8"
           >
             Hi, I'm <span className="text-gold">Rafi</span> – software engineer, researcher, and creative problem solver.
           </motion.h2>
@@ -145,7 +146,7 @@ const HomePage = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex flex-wrap gap-12 border-t border-gold/20 pt-12"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-12 border-t border-gold/20 pt-8 sm:pt-12"
           >
             <StatItem label="Projects" value="10+" />
             <StatItem label="Research Papers" value="2" />

@@ -74,43 +74,43 @@ const ApplicationTracker = () => {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="flex justify-between items-center">
-        <h3 className="text-3xl font-serif">Pursuit Tracker</h3>
-        <GoldButton onClick={() => setIsAdding(!isAdding)} className="flex items-center gap-2">
+    <div className="space-y-6 sm:space-y-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <h3 className="text-2xl sm:text-3xl font-serif">Pursuit Tracker</h3>
+        <GoldButton onClick={() => setIsAdding(!isAdding)} className="flex items-center gap-2 text-xs sm:text-sm">
           {isAdding ? <X size={18} /> : <Plus size={18} />}
           {isAdding ? 'Cancel' : 'Register Pursuit'}
         </GoldButton>
       </div>
 
       {isAdding && (
-        <form onSubmit={addApp} className="grid md:grid-cols-5 gap-4 bg-cream p-6 border border-gold/10">
-          <input className="bg-white border border-charcoal/10 p-3 font-serif outline-none col-span-1" placeholder="Company" value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} required />
-          <input className="bg-white border border-charcoal/10 p-3 font-serif outline-none col-span-1" placeholder="Role" value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} required />
-          <input type="date" className="bg-white border border-charcoal/10 p-3 font-mono text-xs outline-none col-span-1" value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} required />
-          <input className="bg-white border border-charcoal/10 p-3 font-serif outline-none col-span-1" placeholder="Link" value={formData.link} onChange={e => setFormData({...formData, link: e.target.value})} />
-          <button type="submit" className="bg-charcoal text-gold p-3 uppercase tracking-widest text-xs font-mono font-bold hover:bg-gold hover:text-white transition-all">Submit</button>
+        <form onSubmit={addApp} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 sm:gap-4 bg-cream p-4 sm:p-6 border border-gold/10">
+          <input className="bg-white border border-charcoal/10 p-3 font-serif text-sm outline-none" placeholder="Company" value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} required />
+          <input className="bg-white border border-charcoal/10 p-3 font-serif text-sm outline-none" placeholder="Role" value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} required />
+          <input type="date" className="bg-white border border-charcoal/10 p-3 font-mono text-xs outline-none" value={formData.date} onChange={e => setFormData({...formData, date: e.target.value})} required />
+          <input className="bg-white border border-charcoal/10 p-3 font-serif text-sm outline-none" placeholder="Link" value={formData.link} onChange={e => setFormData({...formData, link: e.target.value})} />
+          <button type="submit" className="bg-charcoal text-gold p-3 uppercase tracking-widest text-xs font-mono font-bold hover:bg-gold hover:text-white transition-all sm:col-span-2 md:col-span-1">Submit</button>
         </form>
       )}
 
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
+      <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+        <table className="w-full border-collapse min-w-[500px]">
           <thead>
             <tr className="border-b border-charcoal/10 text-left">
-              <th className="py-4 font-mono text-[10px] uppercase tracking-[0.3em] text-charcoal/40">Company</th>
-              <th className="py-4 font-mono text-[10px] uppercase tracking-[0.3em] text-charcoal/40">Role</th>
-              <th className="py-4 font-mono text-[10px] uppercase tracking-[0.3em] text-charcoal/40">Date</th>
-              <th className="py-4 font-mono text-[10px] uppercase tracking-[0.3em] text-charcoal/40">Status</th>
-              <th className="py-4 font-mono text-[10px] uppercase tracking-[0.3em] text-charcoal/40 text-right">Actions</th>
+              <th className="py-3 font-mono text-[10px] uppercase tracking-[0.3em] text-charcoal/40">Company</th>
+              <th className="py-3 font-mono text-[10px] uppercase tracking-[0.3em] text-charcoal/40">Role</th>
+              <th className="py-3 font-mono text-[10px] uppercase tracking-[0.3em] text-charcoal/40">Date</th>
+              <th className="py-3 font-mono text-[10px] uppercase tracking-[0.3em] text-charcoal/40">Status</th>
+              <th className="py-3 font-mono text-[10px] uppercase tracking-[0.3em] text-charcoal/40 text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-charcoal/5">
             {apps.map(app => (
               <tr key={app.id} className="group hover:bg-white/50 transition-colors">
-                <td className="py-6 pr-4 font-serif text-xl">{app.company}</td>
-                <td className="py-6 px-4 font-serif text-charcoal/70">{app.role}</td>
-                <td className="py-6 px-4 font-mono text-xs">{app.date}</td>
-                <td className="py-6 px-4">
+                <td className="py-4 pr-4 font-serif text-base sm:text-xl">{app.company}</td>
+                <td className="py-4 px-4 font-serif text-sm sm:text-base text-charcoal/70">{app.role}</td>
+                <td className="py-4 px-4 font-mono text-xs">{app.date}</td>
+                <td className="py-4 px-4">
                   <select 
                     value={app.status}
                     onChange={(e) => updateStatus(app.id, e.target.value)}
@@ -119,10 +119,10 @@ const ApplicationTracker = () => {
                     {['Applied', 'Interviewed', 'Offer', 'Rejected'].map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
                 </td>
-                <td className="py-6 pl-4 text-right">
-                  <div className="flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                    {app.link && <a href={app.link} target="_blank" rel="noreferrer" className="text-charcoal/40 hover:text-gold transition-colors"><ExternalLink size={18} /></a>}
-                    <button onClick={() => deleteApp(app.id)} className="text-charcoal/40 hover:text-red-500 transition-colors"><Trash2 size={18} /></button>
+                <td className="py-4 pl-4 text-right">
+                  <div className="flex justify-end gap-3 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                    {app.link && <a href={app.link} target="_blank" rel="noreferrer" className="text-charcoal/50 hover:text-gold transition-colors p-1" aria-label="Open link"><ExternalLink size={16} /></a>}
+                    <button onClick={() => deleteApp(app.id)} className="text-charcoal/50 hover:text-red-500 transition-colors p-1" aria-label="Delete app"><Trash2 size={16} /></button>
                   </div>
                 </td>
               </tr>

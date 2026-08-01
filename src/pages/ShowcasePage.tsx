@@ -29,29 +29,29 @@ const ShowcasePage = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-12">
+    <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12 px-1 sm:px-2">
       <SEO 
         title="Showcase" 
         description="A curated collection of digital artifacts, academic contributions, and personal passions by NH Rafi. Featuring web development, machine learning research, and 3D design."
         keywords="Portfolio, Projects, Research Papers, Photography, Culinary Arts, Freelance, Development"
         schemaData={showcaseSchema}
       />
-      <header className="space-y-4">
-        <h1 className="text-5xl font-serif">Showcase</h1>
-        <p className="text-charcoal/60 font-serif italic max-w-2xl text-lg">
+      <header className="space-y-3 sm:space-y-4">
+        <h1 className="text-3xl sm:text-5xl font-serif">Showcase</h1>
+        <p className="text-charcoal/60 font-serif italic max-w-2xl text-base sm:text-lg">
           A collection of digital artifacts, academic contributions, and personal passions.
         </p>
       </header>
 
       {/* Tabs */}
-      <div className="flex flex-wrap gap-8 border-b border-gold/10 overflow-x-auto pb-px custom-scrollbar">
+      <div className="flex gap-4 sm:gap-8 border-b border-gold/10 overflow-x-auto pb-3 custom-scrollbar whitespace-nowrap -mx-2 px-2 sm:mx-0 sm:px-0">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`group flex items-center gap-3 pb-6 transition-all duration-300 relative ${activeTab === tab.id ? 'text-gold' : 'text-charcoal/40 hover:text-charcoal'}`}
+            className={`group flex items-center gap-2.5 pb-3 transition-all duration-300 relative shrink-0 ${activeTab === tab.id ? 'text-gold' : 'text-charcoal/40 hover:text-charcoal'}`}
           >
-            <tab.icon size={18} />
+            <tab.icon size={16} />
             <span className="uppercase tracking-[0.2em] text-xs font-mono">{tab.label}</span>
             {activeTab === tab.id && (
               <motion.div 
@@ -87,7 +87,7 @@ const ShowcasePage = () => {
 };
 
 const ProjectsGrid = () => (
-  <div className="grid md:grid-cols-2 gap-8">
+  <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
     {seedData.projects.map((project) => (
       <div key={project.id} className="deco-card group">
         <div className="aspect-video overflow-hidden">
@@ -97,17 +97,17 @@ const ProjectsGrid = () => (
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
         </div>
-        <div className="p-8 space-y-6">
+        <div className="p-5 sm:p-8 space-y-4 sm:space-y-6">
           <div className="flex flex-wrap gap-2">
             {project.techTags.map(tag => <Badge key={tag}>{tag}</Badge>)}
           </div>
-          <h3 className="text-3xl font-serif leading-tight group-hover:text-gold transition-colors">{project.title}</h3>
-          <p className="text-charcoal/60 leading-relaxed font-serif">{project.description}</p>
-          <div className="flex gap-4 pt-4">
-            <a href={project.liveLink} className="text-gold flex items-center gap-2 text-sm uppercase tracking-widest font-mono">
+          <h3 className="text-xl sm:text-3xl font-serif leading-tight group-hover:text-gold transition-colors">{project.title}</h3>
+          <p className="text-charcoal/60 leading-relaxed font-serif text-sm sm:text-base">{project.description}</p>
+          <div className="flex flex-wrap gap-4 pt-2 sm:pt-4">
+            <a href={project.liveLink} className="text-gold flex items-center gap-2 text-xs sm:text-sm uppercase tracking-widest font-mono">
               <ExternalLink size={16} /> Live Demo
             </a>
-            <a href={project.repoLink} className="text-charcoal/40 hover:text-charcoal flex items-center gap-2 text-sm uppercase tracking-widest font-mono transition-colors">
+            <a href={project.repoLink} className="text-charcoal/40 hover:text-charcoal flex items-center gap-2 text-xs sm:text-sm uppercase tracking-widest font-mono transition-colors">
               <Github size={16} /> Source
             </a>
           </div>
@@ -118,20 +118,20 @@ const ProjectsGrid = () => (
 );
 
 const ResearchList = () => (
-  <div className="space-y-8 max-w-4xl">
+  <div className="space-y-6 sm:space-y-8 max-w-4xl">
     {seedData.research.map((item) => (
-      <div key={item.id} className="bg-white p-12 shadow-sm border-l-4 border-gold relative group white-box">
-        <div className="absolute top-8 right-8">
+      <div key={item.id} className="bg-white p-6 sm:p-12 shadow-sm border-l-4 border-gold relative group white-box">
+        <div className="sm:absolute top-6 sm:top-8 right-6 sm:right-8 mb-4 sm:mb-0">
           <Badge>{item.status}</Badge>
         </div>
-        <h3 className="text-3xl font-serif mb-4 pr-16 leading-tight group-hover:text-gold transition-colors">{item.title}</h3>
-        <div className="text-charcoal/40 font-mono text-xs uppercase tracking-widest mb-6">
+        <h3 className="text-xl sm:text-3xl font-serif mb-3 sm:mb-4 sm:pr-24 leading-tight group-hover:text-gold transition-colors">{item.title}</h3>
+        <div className="text-charcoal/40 font-mono text-[10px] sm:text-xs uppercase tracking-widest mb-4 sm:mb-6">
           {item.authors} | {item.journal} | {item.date}
         </div>
-        <p className="text-charcoal/70 font-serif leading-relaxed line-clamp-3 mb-8">
+        <p className="text-charcoal/70 font-serif leading-relaxed line-clamp-3 mb-6 sm:mb-8 text-sm sm:text-base">
           {item.abstract}
         </p>
-        <GoldButton className="flex items-center gap-2 text-sm">
+        <GoldButton className="flex items-center gap-2 text-xs sm:text-sm">
           <FileText size={16} /> Download Paper
         </GoldButton>
       </div>
@@ -140,7 +140,7 @@ const ResearchList = () => (
 );
 
 const PhotographyGallery = () => (
-  <div className="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
+  <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
     {seedData.photography.map((photo) => (
       <div key={photo.id} className="relative group overflow-hidden break-inside-avoid">
         <img 
@@ -161,7 +161,7 @@ const PhotographyGallery = () => (
 );
 
 const CookingCards = () => (
-  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
     {seedData.cooking.map((recipe) => (
       <div key={recipe.id} className="deco-card group">
         <div className="aspect-square overflow-hidden relative">
@@ -172,8 +172,8 @@ const CookingCards = () => (
             </div>
           )}
         </div>
-        <div className="p-8">
-          <h3 className="text-2xl font-serif mb-4 group-hover:text-gold transition-colors">{recipe.title}</h3>
+        <div className="p-6 sm:p-8">
+          <h3 className="text-xl sm:text-2xl font-serif mb-4 group-hover:text-gold transition-colors">{recipe.title}</h3>
           <div className="flex flex-wrap gap-2 mb-6">
             {recipe.ingredients.slice(0, 3).map(i => <Badge key={i} color="gold">{i}</Badge>)}
             {recipe.ingredients.length > 3 && <span className="text-xs text-charcoal/40">+{recipe.ingredients.length - 3} more</span>}
@@ -188,13 +188,13 @@ const CookingCards = () => (
 const FreelanceHistory = () => (
   <div className="space-y-6 max-w-4xl">
     {seedData.freelanceHistory.map((job) => (
-      <div key={job.id} className="flex flex-col md:flex-row gap-8 bg-white p-8 items-center group white-box">
-        <div className="w-20 h-20 bg-gold/10 flex items-center justify-center text-gold font-serif text-3xl">
+      <div key={job.id} className="flex flex-col md:flex-row gap-6 sm:gap-8 bg-white p-5 sm:p-8 items-center group white-box">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gold/10 flex items-center justify-center text-gold font-serif text-2xl sm:text-3xl shrink-0">
           {job.client.charAt(0)}
         </div>
         <div className="flex-1 space-y-2 text-center md:text-left">
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
-            <h4 className="text-2xl font-serif pr-4 border-r border-gold/20 leading-none">{job.client}</h4>
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4">
+            <h4 className="text-xl sm:text-2xl font-serif pr-4 border-r border-gold/20 leading-none">{job.client}</h4>
             <Badge color="green">{job.badge}</Badge>
             <div className="flex gap-0.5">
               {[...Array(5)].map((_, i) => (
@@ -202,10 +202,10 @@ const FreelanceHistory = () => (
               ))}
             </div>
           </div>
-          <p className="text-charcoal/60 font-serif italic text-lg">{job.service}</p>
+          <p className="text-charcoal/60 font-serif italic text-base sm:text-lg">{job.service}</p>
         </div>
-        <div className="text-right">
-          <div className="text-2xl font-serif text-gold">${job.earnings}</div>
+        <div className="text-center md:text-right">
+          <div className="text-xl sm:text-2xl font-serif text-gold">${job.earnings}</div>
           <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-charcoal/30">{job.date}</div>
         </div>
       </div>

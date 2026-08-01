@@ -42,31 +42,31 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto py-12 px-4 space-y-20">
+    <div className="max-w-6xl mx-auto py-6 sm:py-12 px-2 sm:px-4 space-y-12 sm:space-y-20">
       <SEO 
         title="Contact" 
         description="Get in touch with Nazmul Haque Rafi (NH Rafi). Open for collaborations, professional opportunities, and research discussions."
         keywords="Contact, Hire, Collaboration, Software Engineer, Chittagong, Bangladesh"
         schemaData={contactSchema}
       />
-      <header className="text-center space-y-4">
-        <h1 className="text-6xl font-serif">Get in Touch</h1>
-        <p className="text-charcoal/60 font-serif italic max-w-xl mx-auto text-lg">
+      <header className="text-center space-y-3 sm:space-y-4">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-serif">Get in Touch</h1>
+        <p className="text-charcoal/60 font-serif italic max-w-xl mx-auto text-base sm:text-lg">
           Whether you have a potential project, a research inquiry, or just want to say hello, my inbox is always open.
         </p>
       </header>
 
-      <div className="grid lg:grid-cols-5 gap-12 items-start">
+      <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-start">
         {/* Contact Form */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="lg:col-span-3 bg-white p-12 border border-gold/10 shadow-2xl relative white-box"
+          className="lg:col-span-3 bg-white p-6 sm:p-10 md:p-12 border border-gold/10 shadow-2xl relative white-box"
         >
-          <div className="absolute top-0 right-0 w-32 h-32 border-t border-r border-gold/20 -translate-x-4 translate-y-4 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-20 h-20 sm:w-32 sm:h-32 border-t border-r border-gold/20 -translate-x-2 translate-y-2 sm:-translate-x-4 sm:translate-y-4 pointer-events-none" />
           
-          <form className="space-y-8" onSubmit={handleSubmit}>
-            <div className="grid md:grid-cols-2 gap-8">
+          <form className="space-y-6 sm:space-y-8" onSubmit={handleSubmit}>
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
               <FloatingInput 
                 label="Full Name" 
                 value={formData.name} 
@@ -87,21 +87,21 @@ const ContactPage = () => {
               onChange={(e) => setFormData({ ...formData, subject: e.target.value })} 
               required 
             />
-            <div className="relative">
+            <div className="relative pt-2">
               <textarea 
-                className="w-full bg-transparent border-b border-charcoal/20 py-4 focus:border-gold outline-none transition-all resize-none h-32 peer font-serif"
+                className="w-full bg-transparent border-b border-charcoal/20 py-3 sm:py-4 focus:border-gold outline-none transition-all resize-none h-28 sm:h-32 peer font-serif text-sm sm:text-base"
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 required
               />
-              <label className={`absolute left-0 transition-all duration-300 pointer-events-none uppercase tracking-widest text-xs font-mono ${formData.message ? '-top-4 text-gold' : 'top-4 text-charcoal/40 peer-focus:-top-4 peer-focus:text-gold'}`}>
+              <label className={`absolute left-0 transition-all duration-300 pointer-events-none uppercase tracking-widest text-[10px] sm:text-xs font-mono ${formData.message ? '-top-2 text-gold' : 'top-5 text-charcoal/40 peer-focus:-top-2 peer-focus:text-gold'}`}>
                 Tell me about your inquiry
               </label>
             </div>
             
             <button 
               disabled={status === 'submitting'}
-              className="gold-button w-full py-4 flex items-center justify-center gap-4 text-sm uppercase tracking-[0.3em]"
+              className="gold-button w-full py-3.5 sm:py-4 flex items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em]"
             >
               {status === 'submitting' ? 'Transmitting...' : status === 'success' ? 'Message Received' : (
                 <>
@@ -114,7 +114,7 @@ const ContactPage = () => {
         </motion.div>
 
         {/* Contact Info */}
-        <div className="lg:col-span-2 space-y-8">
+        <div className="lg:col-span-2 space-y-6 sm:space-y-8">
           <ContactInfoCard 
             icon={Mail} 
             title="Email" 
@@ -133,11 +133,11 @@ const ContactPage = () => {
             content="Mon — Fri, 9:00 — 18:00" 
             sub="Current Time: GMT+6" 
           />
-          <div className="bg-white p-8 border border-gold/10 white-box">
-            <h4 className="text-sm font-mono uppercase tracking-[0.3em] text-charcoal/40 mb-6 flex items-center gap-3">
+          <div className="bg-white p-6 sm:p-8 border border-gold/10 white-box">
+            <h4 className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] sm:tracking-[0.3em] text-charcoal/40 mb-4 sm:mb-6 flex items-center gap-3">
               <Share2 size={14} /> Social Presence
             </h4>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <SocialLink name="LinkedIn" href="#" />
               <SocialLink name="GitHub" href="#" />
               <SocialLink name="Twitter" href="#" />

@@ -78,7 +78,7 @@ const MyThinkingPage = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-20 py-12 px-4">
+    <div className="max-w-7xl mx-auto space-y-12 sm:space-y-20 py-6 sm:py-12 px-2 sm:px-4">
       <SEO 
         title="My Thinking" 
         description="Explore the thoughts, articles, and technical explorations of Nazmul Haque Rafi. A deep dive into software architecture, AI, and creative philosophy."
@@ -86,31 +86,31 @@ const MyThinkingPage = () => {
         schemaData={blogSchema}
       />
 
-      <header className="relative space-y-6 text-center">
+      <header className="relative space-y-4 sm:space-y-6 text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           className="inline-block"
         >
-          <Badge text="Intellectual Journal" />
+          <Badge>Intellectual Journal</Badge>
         </motion.div>
-        <h1 className="text-7xl font-serif tracking-tight text-charcoal">My Thinking</h1>
-        <p className="text-charcoal/60 font-serif italic max-w-2xl mx-auto text-xl leading-relaxed">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif tracking-tight text-charcoal">My Thinking</h1>
+        <p className="text-charcoal/60 font-serif italic max-w-2xl mx-auto text-base sm:text-xl leading-relaxed">
           "Architecture is not just about buildings, but about the structure of our thoughts and the systems we inhabit."
         </p>
 
         {isOwner && (
-          <div className="pt-8">
-            <GoldButton onClick={() => setIsAdding(true)} className="flex items-center gap-2 mx-auto">
-              <Plus size={20} />
+          <div className="pt-4 sm:pt-8">
+            <GoldButton onClick={() => setIsAdding(true)} className="flex items-center gap-2 mx-auto text-xs sm:text-sm">
+              <Plus size={18} />
               Chronicle a New Thought
             </GoldButton>
           </div>
         )}
       </header>
 
-      <section className="grid lg:grid-cols-12 gap-12">
-        <div className="lg:col-span-8 space-y-16">
+      <section className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+        <div className="lg:col-span-8 space-y-8 sm:space-y-16">
           <AnimatePresence mode="popLayout">
             {posts.map((post, index) => (
               <motion.article
@@ -119,16 +119,16 @@ const MyThinkingPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative bg-white p-8 md:p-12 border border-charcoal/5 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden"
+                className="group relative bg-white p-5 sm:p-8 md:p-12 border border-charcoal/5 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden"
               >
                 {/* Deco Background Text */}
                 <div className="absolute top-0 right-0 p-4 opacity-[0.03] pointer-events-none select-none">
-                  <span className="text-8xl font-serif">{index + 1}</span>
+                  <span className="text-6xl sm:text-8xl font-serif">{index + 1}</span>
                 </div>
 
-                <div className="flex flex-col md:flex-row gap-12">
-                  <div className="flex-1 space-y-6">
-                    <div className="flex items-center gap-4 text-xs font-mono uppercase tracking-widest text-gold/80">
+                <div className="flex flex-col md:flex-row gap-6 sm:gap-12">
+                  <div className="flex-1 space-y-4 sm:space-y-6">
+                    <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-mono uppercase tracking-widest text-gold/80">
                       <span className="flex items-center gap-1">
                         <Calendar size={14} />
                         {post.createdAt?.toDate ? new Date(post.createdAt.toDate()).toLocaleDateString() : 'Draft'}
@@ -141,16 +141,16 @@ const MyThinkingPage = () => {
                       )}
                     </div>
 
-                    <h2 className="text-4xl font-serif text-charcoal group-hover:text-gold transition-colors duration-300 leading-tight">
+                    <h2 className="text-2xl sm:text-4xl font-serif text-charcoal group-hover:text-gold transition-colors duration-300 leading-tight">
                       {post.title}
                     </h2>
 
-                    <div className="prose prose-stone max-w-none prose-p:font-serif prose-p:italic prose-p:text-charcoal/80">
+                    <div className="prose prose-stone max-w-none prose-p:font-serif prose-p:italic prose-p:text-charcoal/80 text-sm sm:text-base">
                       <ReactMarkdown>{post.content}</ReactMarkdown>
                     </div>
 
-                    <div className="flex items-center justify-between pt-8 border-t border-charcoal/5">
-                      <div className="flex gap-2">
+                    <div className="flex items-center justify-between pt-6 sm:pt-8 border-t border-charcoal/5">
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
                         {post.tags?.map(tag => (
                           <span key={tag} className="text-[10px] uppercase tracking-widest bg-gold/5 px-2 py-1 text-gold">
                             #{tag}
@@ -162,6 +162,7 @@ const MyThinkingPage = () => {
                         <button 
                           onClick={() => deletePost(post.id)}
                           className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 transition-all rounded-full"
+                          aria-label="Delete post"
                         >
                           <Trash2 size={18} />
                         </button>
@@ -170,7 +171,7 @@ const MyThinkingPage = () => {
                   </div>
 
                   {post.imageUrl && (
-                    <div className="md:w-1/3 h-64 md:h-auto overflow-hidden border border-gold/10">
+                    <div className="md:w-1/3 h-48 sm:h-64 md:h-auto overflow-hidden border border-gold/10 shrink-0">
                       <img 
                         src={post.imageUrl} 
                         alt={post.title} 
@@ -184,25 +185,25 @@ const MyThinkingPage = () => {
           </AnimatePresence>
 
           {posts.length === 0 && (
-            <div className="text-center py-20 bg-charcoal/5 border border-dashed border-charcoal/10">
-              <p className="text-charcoal/40 font-serif italic">The architect is silent... for now.</p>
+            <div className="text-center py-16 sm:py-20 bg-charcoal/5 border border-dashed border-charcoal/10">
+              <p className="text-charcoal/40 font-serif italic text-sm sm:text-base">The architect is silent... for now.</p>
             </div>
           )}
         </div>
 
-        <aside className="lg:col-span-4 space-y-8">
-          <div className="sticky top-24 space-y-8">
-            <div className="bg-cream p-8 border border-gold/20 relative overflow-hidden">
+        <aside className="lg:col-span-4 space-y-6 sm:space-y-8">
+          <div className="lg:sticky lg:top-24 space-y-6 sm:space-y-8">
+            <div className="bg-cream p-6 sm:p-8 border border-gold/20 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-gold/20 -translate-x-1 translate-y-1" />
-              <h3 className="text-xl font-serif mb-4">Thinking in Architecture</h3>
-              <p className="text-sm text-charcoal/70 font-serif italic leading-relaxed">
+              <h3 className="text-lg sm:text-xl font-serif mb-3 sm:mb-4">Thinking in Architecture</h3>
+              <p className="text-xs sm:text-sm text-charcoal/70 font-serif italic leading-relaxed">
                 A repository of technical insights and philosophical reflections on the intersection of code, space, and human interaction.
               </p>
             </div>
 
-            <div className="bg-white p-8 border border-charcoal/5 uppercase tracking-[0.2em] text-[10px]">
-              <h4 className="text-gold mb-4 mb-6">Archive Segments</h4>
-              <ul className="space-y-4">
+            <div className="bg-white p-6 sm:p-8 border border-charcoal/5 uppercase tracking-[0.2em] text-[10px]">
+              <h4 className="text-gold mb-4 sm:mb-6">Archive Segments</h4>
+              <ul className="space-y-3 sm:space-y-4">
                 {['Meta-Analysis', 'Systemic Flux', 'Digital Tectonics', 'User Phenomenology'].map(tag => (
                   <li key={tag} className="flex items-center justify-between hover:text-gold transition-colors cursor-pointer group">
                     <span>{tag}</span>
@@ -218,7 +219,7 @@ const MyThinkingPage = () => {
       {/* Post Modal */}
       <AnimatePresence>
         {isAdding && (
-          <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[110] flex items-center justify-center p-3 sm:p-6">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -231,62 +232,63 @@ const MyThinkingPage = () => {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-4xl bg-cream p-12 shadow-2xl border border-gold/30 overflow-y-auto max-h-[90vh]"
+              className="relative w-full max-w-4xl bg-cream p-5 sm:p-8 md:p-12 shadow-2xl border border-gold/30 overflow-y-auto max-h-[92vh]"
             >
               <button 
                 onClick={() => setIsAdding(false)}
-                className="absolute top-6 right-6 p-2 text-charcoal/50 hover:text-charcoal transition-colors"
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 text-charcoal/50 hover:text-charcoal transition-colors"
+                aria-label="Close"
               >
-                <X size={24} />
+                <X size={20} />
               </button>
 
-              <h2 className="text-4xl font-serif mb-12 text-charcoal">Chronicle Your Thoughts</h2>
+              <h2 className="text-2xl sm:text-4xl font-serif mb-6 sm:mb-12 text-charcoal pr-8">Chronicle Your Thoughts</h2>
 
-              <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-12">
-                <div className="space-y-6">
+              <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-6 md:gap-12">
+                <div className="space-y-4 sm:space-y-6">
                   <div>
-                    <label className="block text-xs uppercase tracking-widest text-charcoal/50 mb-2">Article Title</label>
+                    <label className="block text-[10px] sm:text-xs uppercase tracking-widest text-charcoal/50 mb-2">Article Title</label>
                     <input 
                       required
                       value={formData.title}
                       onChange={(e) => setFormData({...formData, title: e.target.value})}
-                      className="w-full bg-white border border-charcoal/10 p-4 focus:ring-1 focus:ring-gold outline-none transition-all font-serif italic text-lg"
+                      className="w-full bg-white border border-charcoal/10 p-3 sm:p-4 focus:ring-1 focus:ring-gold outline-none transition-all font-serif italic text-base sm:text-lg"
                       placeholder="The Dialectics of Spacial Code..."
                     />
                   </div>
                   <div>
-                    <label className="block text-xs uppercase tracking-widest text-charcoal/50 mb-2">Meta Tags (comma separated)</label>
+                    <label className="block text-[10px] sm:text-xs uppercase tracking-widest text-charcoal/50 mb-2">Meta Tags (comma separated)</label>
                     <input 
                       value={formData.tags}
                       onChange={(e) => setFormData({...formData, tags: e.target.value})}
-                      className="w-full bg-white border border-charcoal/10 p-4 focus:ring-1 focus:ring-gold outline-none font-mono text-sm"
+                      className="w-full bg-white border border-charcoal/10 p-3 sm:p-4 focus:ring-1 focus:ring-gold outline-none font-mono text-xs sm:text-sm"
                       placeholder="architecture, ai, systems"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs uppercase tracking-widest text-charcoal/50 mb-2">Cover Imagery URL</label>
+                    <label className="block text-[10px] sm:text-xs uppercase tracking-widest text-charcoal/50 mb-2">Cover Imagery URL</label>
                     <input 
                       value={formData.imageUrl}
                       onChange={(e) => setFormData({...formData, imageUrl: e.target.value})}
-                      className="w-full bg-white border border-charcoal/10 p-4 focus:ring-1 focus:ring-gold outline-none font-mono text-xs"
+                      className="w-full bg-white border border-charcoal/10 p-3 sm:p-4 focus:ring-1 focus:ring-gold outline-none font-mono text-xs"
                       placeholder="https://images.unsplash.com/..."
                     />
                   </div>
                 </div>
 
-                <div className="space-y-6 flex flex-col">
+                <div className="space-y-4 sm:space-y-6 flex flex-col">
                   <div className="flex-1">
-                    <label className="block text-xs uppercase tracking-widest text-charcoal/50 mb-2">Content (Markdown Supported)</label>
+                    <label className="block text-[10px] sm:text-xs uppercase tracking-widest text-charcoal/50 mb-2">Content (Markdown Supported)</label>
                     <textarea 
                       required
                       value={formData.content}
                       onChange={(e) => setFormData({...formData, content: e.target.value})}
-                      className="w-full h-80 bg-white border border-charcoal/10 p-6 focus:ring-1 focus:ring-gold outline-none font-serif text-lg leading-relaxed resize-none"
+                      className="w-full h-48 sm:h-64 md:h-80 bg-white border border-charcoal/10 p-4 sm:p-6 focus:ring-1 focus:ring-gold outline-none font-serif text-base sm:text-lg leading-relaxed resize-none"
                       placeholder="Transcribe your insights here..."
                     />
                   </div>
-                  <GoldButton type="submit" className="w-full py-5 text-lg flex items-center justify-center gap-3">
-                    <Send size={20} />
+                  <GoldButton type="submit" className="w-full py-3.5 sm:py-5 text-sm sm:text-lg flex items-center justify-center gap-3">
+                    <Send size={18} />
                     Publish to thinking
                   </GoldButton>
                 </div>

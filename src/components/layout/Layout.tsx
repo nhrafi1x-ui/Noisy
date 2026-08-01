@@ -18,7 +18,7 @@ const Layout = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-            className="p-4 md:p-8 lg:p-12 min-h-screen"
+            className="p-4 sm:p-6 md:p-8 lg:p-12 pb-24 md:pb-12 min-h-screen"
           >
             <Outlet />
           </motion.div>

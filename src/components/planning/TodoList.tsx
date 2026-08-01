@@ -71,49 +71,51 @@ const TodoList = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-12">
-      <form onSubmit={addTodo} className="space-y-4 bg-cream p-8 border border-gold/10">
-        <h3 className="text-2xl font-serif mb-4">Strategic Tasks</h3>
-        <div className="flex gap-4">
+    <div className="max-w-2xl mx-auto space-y-6 sm:space-y-12">
+      <form onSubmit={addTodo} className="space-y-4 bg-cream p-4 sm:p-8 border border-gold/10">
+        <h3 className="text-xl sm:text-2xl font-serif mb-2 sm:mb-4">Strategic Tasks</h3>
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
           <input 
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
-            placeholder="Identity a new objective..."
-            className="flex-1 bg-white border border-charcoal/10 p-4 font-serif outline-none focus:border-gold"
+            placeholder="Identify a new objective..."
+            className="flex-1 bg-white border border-charcoal/10 p-3 sm:p-4 font-serif text-sm sm:text-base outline-none focus:border-gold"
           />
-          <select 
-            value={priority}
-            onChange={(e) => setPriority(e.target.value as any)}
-            className="bg-white border border-charcoal/10 px-4 font-mono text-xs uppercase tracking-widest outline-none focus:border-gold"
-          >
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select>
-          <button type="submit" className="bg-charcoal text-gold p-4 hover:bg-gold hover:text-white transition-colors">
-            <Plus size={24} />
-          </button>
+          <div className="flex gap-2">
+            <select 
+              value={priority}
+              onChange={(e) => setPriority(e.target.value as any)}
+              className="flex-1 sm:flex-none bg-white border border-charcoal/10 px-3 sm:px-4 py-3 font-mono text-xs uppercase tracking-widest outline-none focus:border-gold"
+            >
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+            <button type="submit" className="bg-charcoal text-gold p-3 sm:p-4 hover:bg-gold hover:text-white transition-colors" aria-label="Add task">
+              <Plus size={20} />
+            </button>
+          </div>
         </div>
       </form>
 
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {todos.sort((a,b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1)).map((todo) => (
           <motion.div 
             layout
             key={todo.id}
-            className={`flex items-center gap-6 p-6 bg-white border-l-4 transition-all duration-300 ${todo.completed ? 'opacity-50 border-gray-300 shadow-none' : 'shadow-sm hover:shadow-md border-gold'}`}
+            className={`flex items-center gap-3 sm:gap-6 p-4 sm:p-6 bg-white border-l-4 transition-all duration-300 ${todo.completed ? 'opacity-50 border-gray-300 shadow-none' : 'shadow-sm hover:shadow-md border-gold'}`}
           >
-            <button onClick={() => toggleTodo(todo.id, todo.completed)} className="text-gold transition-transform hover:scale-110 active:scale-95">
-              {todo.completed ? <CheckCircle2 size={24} /> : <Circle size={24} />}
+            <button onClick={() => toggleTodo(todo.id, todo.completed)} className="text-gold transition-transform hover:scale-110 active:scale-95 shrink-0" aria-label="Toggle completion">
+              {todo.completed ? <CheckCircle2 size={20} className="sm:w-6 sm:h-6" /> : <Circle size={20} className="sm:w-6 sm:h-6" />}
             </button>
-            <div className="flex-1">
-              <div className={`text-xl font-serif ${todo.completed ? 'line-through decoration-gold/30' : ''}`}>{todo.text}</div>
-              <Badge color={todo.priority === 'High' ? 'red' : todo.priority === 'Medium' ? 'orange' : 'green'} className="mt-2 text-[8px]">
+            <div className="flex-1 min-w-0">
+              <div className={`text-base sm:text-xl font-serif break-words ${todo.completed ? 'line-through decoration-gold/30' : ''}`}>{todo.text}</div>
+              <Badge color={todo.priority === 'High' ? 'red' : todo.priority === 'Medium' ? 'orange' : 'green'} className="mt-1.5 text-[8px]">
                 {todo.priority} Priority
               </Badge>
             </div>
-            <button onClick={() => deleteTodo(todo.id)} className="text-charcoal/10 hover:text-red-500 transition-colors">
-              <Trash2 size={20} />
+            <button onClick={() => deleteTodo(todo.id)} className="text-charcoal/30 hover:text-red-500 transition-colors p-1 shrink-0" aria-label="Delete todo">
+              <Trash2 size={18} />
             </button>
           </motion.div>
         ))}

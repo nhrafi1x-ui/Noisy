@@ -36,39 +36,39 @@ const AboutPage = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto space-y-32 py-12 px-4">
+    <div className="max-w-6xl mx-auto space-y-16 md:space-y-32 py-6 sm:py-12 px-2 sm:px-4">
       <SEO 
         title="About" 
         description="Learn more about Nazmul Haque Rafi (NH Rafi). A Software Engineer and Researcher with a background in Computer Science and a passion for creative technical solutions."
         keywords="Biography, Education, Skills, Software Engineer, Researcher, Premier University Chittagong"
         schemaData={aboutSchema}
       />
-      <section className="grid md:grid-cols-2 gap-16 items-center">
+      <section className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
         <motion.div 
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           className="order-2 md:order-1"
         >
-          <h1 className="text-5xl font-serif mb-8 leading-tight">Biography</h1>
-          <p className="text-xl text-charcoal/70 leading-relaxed font-serif first-letter:text-7xl first-letter:float-left first-letter:mr-4 first-letter:font-bold first-letter:text-gold">
+          <h1 className="text-3xl sm:text-5xl font-serif mb-6 md:mb-8 leading-tight">Biography</h1>
+          <p className="text-base sm:text-xl text-charcoal/70 leading-relaxed font-serif first-letter:text-5xl sm:first-letter:text-7xl first-letter:float-left first-letter:mr-3 sm:first-letter:mr-4 first-letter:font-bold first-letter:text-gold">
             I am a Software Engineer and Researcher dedicated to bridging the gap between artistic vision and technical precision. My work spans from high-end 3D architectural design to rigorous machine learning research. With over four years of experience in creative problem-solving, I aim to create digital experiences that are as beautiful as they are functional.
           </p>
-          <div className="mt-12 space-y-12">
-            <div className="flex flex-wrap gap-4">
-              <GoldButton className="flex items-center gap-2 px-6 py-3 text-xs uppercase tracking-widest font-bold">
+          <div className="mt-8 sm:mt-12 space-y-8 sm:space-y-12">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <GoldButton className="flex items-center justify-center gap-2 px-6 py-3 text-xs uppercase tracking-widest font-bold w-full sm:w-auto">
                 <Download size={16} />
                 Download CV
               </GoldButton>
-              <GoldButton className="flex items-center gap-2 px-6 py-3 text-xs uppercase tracking-widest font-bold">
+              <GoldButton className="flex items-center justify-center gap-2 px-6 py-3 text-xs uppercase tracking-widest font-bold w-full sm:w-auto">
                 <Download size={16} />
                 Download Resume
               </GoldButton>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <h4 className="text-xs uppercase tracking-[0.3em] font-mono text-charcoal/40">Social Presence</h4>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
                 {socialLinks.map((social) => (
                   <SocialCard key={social.name} icon={social.icon} href={social.href} name={social.name} />
                 ))}
@@ -81,12 +81,12 @@ const AboutPage = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="order-1 md:order-2 relative"
+          className="order-1 md:order-2 relative max-w-md mx-auto md:max-w-none w-full"
         >
           {/* Ornate Frame */}
-          <div className="absolute -inset-4 border border-gold/30 pointer-events-none" />
-          <div className="absolute -inset-2 border-2 border-gold/10 pointer-events-none" />
-          <div className="bg-white p-4 shadow-2xl relative white-box">
+          <div className="absolute -inset-3 sm:-inset-4 border border-gold/30 pointer-events-none" />
+          <div className="absolute -inset-1.5 sm:-inset-2 border-2 border-gold/10 pointer-events-none" />
+          <div className="bg-white p-3 sm:p-4 shadow-2xl relative white-box">
             <img 
               src="/src/assets/images/regenerated_image_1778779242183.jpg" 
               alt="Portrait" 
