@@ -91,7 +91,7 @@ const AboutPage = () => {
             <img 
               src={portraitImg} 
               alt="Portrait" 
-              className="w-full aspect-[3/4] object-cover grayscale hover:grayscale-0 transition-all duration-700 bg-black cursor-pointer"
+              className="w-full aspect-[3/4] object-cover transition-all duration-700 bg-black cursor-pointer"
             />
           </div>
         </motion.div>

@@ -5,7 +5,11 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useAuth } from '../../context/AuthContext';
 import AuthModal from './AuthModal';
 
-const Sidebar = () => {
+interface SidebarProps {
+  onTriggerLoader?: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ onTriggerLoader }) => {
   const { user, logout } = useAuth();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
@@ -21,13 +25,20 @@ const Sidebar = () => {
     <>
       <nav className="fixed left-0 top-0 h-full w-20 bg-charcoal flex flex-col items-center py-8 z-50 md:flex hidden">
         <div className="mb-12">
-          <motion.div 
+          <motion.button 
+            onClick={onTriggerLoader}
+            title="Re-play Nothing OS 3D Loading Screen"
             initial={{ rotate: -45 }}
             animate={{ rotate: 0 }}
-            className="w-10 h-10 border-2 border-gold flex items-center justify-center text-gold font-serif font-bold text-xl"
+            whileHover={{ scale: 1.1 }}
+            className="w-10 h-10 border-2 border-gold flex items-center justify-center text-gold font-serif font-bold text-xl cursor-pointer relative group"
           >
             R
-          </motion.div>
+            <span className="absolute -top-1 -right-1 flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+            </span>
+          </motion.button>
         </div>
 
         <div className="flex flex-col gap-8 flex-1">

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronRight, ChevronLeft, ArrowDown } from 'lucide-react';
+import { ChevronRight, ChevronLeft, ArrowDown, Sparkles } from 'lucide-react';
 import { GoldButton, Badge } from '../components/shared/UI';
 import NextPage from '../components/shared/NextPage';
 import SEO from '../components/shared/SEO';
+import { Showcase3DSlideshow, ShowcaseItem } from '../components/shared/Showcase3DSlideshow';
+import { seedData } from '../data/seedData';
 
 const slides = [
   {
@@ -38,6 +40,36 @@ const slides = [
   }
 ];
 
+// Convert seedData into 3D Showcase Slideshow items
+const showcaseSlideshowItems: ShowcaseItem[] = [
+  ...seedData.projects.map(p => ({
+    id: p.id,
+    title: p.title,
+    description: p.description,
+    imageUrl: p.imageUrl,
+    techTags: p.techTags,
+    liveLink: p.liveLink,
+    repoLink: p.repoLink,
+    category: 'Project'
+  })),
+  {
+    id: 'res-1',
+    title: seedData.research[0].title,
+    description: seedData.research[0].abstract,
+    imageUrl: 'https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&q=80&w=800',
+    techTags: ['AI Research', 'Optimization', 'Neural Nets'],
+    category: 'Research'
+  },
+  {
+    id: 'photo-1',
+    title: seedData.photography[0].title,
+    description: `Shot on ${seedData.photography[0].camera} • ${seedData.photography[0].settings}`,
+    imageUrl: seedData.photography[0].url,
+    techTags: ['Fujifilm', 'Street Photo'],
+    category: 'Photography'
+  }
+];
+
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -60,85 +92,104 @@ const HomePage = () => {
   };
 
   return (
-    <div className="space-y-12 max-w-7xl mx-auto py-8">
+    <div className="space-y-12 sm:space-y-16 max-w-7xl mx-auto py-4 sm:py-8">
       <SEO 
         title="Home" 
         description="Official portfolio of Nazmul Haque Rafi (NH Rafi). A software engineer and researcher building robust, scalable digital architectures and exploring AI optimization."
         schemaData={personSchema}
       />
-      <header className="px-4">
-        <h2 className="text-sm uppercase tracking-[0.5em] font-mono text-gold/60">Interests.</h2>
-      </header>
+      
+      {/* Small & Sleek Hero Image Slideshow */}
+      <section className="space-y-3 px-1 sm:px-2">
+        <div className="flex items-center justify-between px-2">
+          <h2 className="text-xs uppercase tracking-[0.4em] font-mono text-gold/80">Interests Overview</h2>
+          <span className="text-[10px] font-mono text-charcoal/40 uppercase tracking-widest">{currentSlide + 1} / {slides.length}</span>
+        </div>
 
-      {/* Hero Slideshow */}
-      <section className="relative h-[65vh] sm:h-[75vh] md:h-[80vh] overflow-hidden group rounded-sm">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            className="absolute inset-0"
-          >
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-charcoal/10 z-10" />
-            <img 
-              src={slides[currentSlide].image} 
-              alt={slides[currentSlide].title} 
-              className="w-full h-full object-cover transition-transform duration-[10000ms] scale-110 group-hover:scale-100"
-            />
-            
-            <div className="absolute bottom-6 left-4 right-12 sm:bottom-10 sm:left-8 sm:right-16 md:bottom-12 md:left-12 md:right-12 z-20 flex flex-col items-start gap-2 sm:gap-4">
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5 }}
-              >
-                <Badge>{slides[currentSlide].category}</Badge>
-              </motion.div>
-              <motion.h1 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-serif text-white max-w-2xl leading-tight"
-              >
-                {slides[currentSlide].title}
-              </motion.h1>
-              <motion.p 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.7 }}
-                className="text-sm sm:text-lg md:text-xl text-white/80 font-serif italic line-clamp-2"
-              >
-                {slides[currentSlide].subtitle}
-              </motion.p>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Sidebar Indicators */}
-        <div className="absolute right-3 sm:right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-3 sm:gap-4">
-          {slides.map((_, idx) => (
-            <button 
-              key={idx}
-              onClick={() => setCurrentSlide(idx)}
-              className="group relative flex items-center justify-end p-1"
-              aria-label={`Slide ${idx + 1}`}
+        <div className="relative h-[32vh] sm:h-[38vh] md:h-[42vh] max-h-[380px] min-h-[240px] overflow-hidden group rounded-lg border border-gold/20 shadow-lg">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0, scale: 1.08 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="absolute inset-0"
             >
-              <span className={`h-px transition-all duration-500 bg-gold ${currentSlide === idx ? 'w-8 sm:w-12' : 'w-3 sm:w-4 opacity-40 group-hover:w-6 group-hover:opacity-100'}`} />
-            </button>
-          ))}
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent z-10" />
+              <img 
+                src={slides[currentSlide].image} 
+                alt={slides[currentSlide].title} 
+                className="w-full h-full object-cover transition-transform duration-[8000ms] scale-105 group-hover:scale-100"
+              />
+              
+              <div className="absolute bottom-4 left-4 right-12 sm:bottom-6 sm:left-6 sm:right-16 z-20 flex flex-col items-start gap-1.5 sm:gap-2">
+                <motion.div
+                  initial={{ y: 15, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <Badge>{slides[currentSlide].category}</Badge>
+                </motion.div>
+                <motion.h1 
+                  initial={{ y: 15, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-xl sm:text-3xl md:text-4xl font-serif text-white max-w-2xl leading-tight"
+                >
+                  {slides[currentSlide].title}
+                </motion.h1>
+                <motion.p 
+                  initial={{ y: 15, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                  className="text-xs sm:text-sm md:text-base text-white/80 font-serif italic line-clamp-1"
+                >
+                  {slides[currentSlide].subtitle}
+                </motion.p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Indicators */}
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-2">
+            {slides.map((_, idx) => (
+              <button 
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                className="group relative flex items-center justify-end p-1 cursor-pointer"
+                aria-label={`Slide ${idx + 1}`}
+              >
+                <span className={`h-1 rounded-full transition-all duration-500 bg-gold ${currentSlide === idx ? 'w-6 bg-gold' : 'w-2 opacity-40 group-hover:w-4 group-hover:opacity-100'}`} />
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
+      {/* 3D Showcase Slideshow Section */}
+      <section className="space-y-4 px-1 sm:px-2 border-t border-gold/10 pt-8 sm:pt-12">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 px-2">
+          <div>
+            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.4em] font-mono text-gold mb-1">
+              <Sparkles size={14} /> Interactive 3D Showcase
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-serif">Featured Showcase</h2>
+          </div>
+          <p className="text-xs font-mono text-charcoal/50 uppercase tracking-wider">Drag or click cards to rotate in 3D</p>
+        </div>
+
+        <Showcase3DSlideshow items={showcaseSlideshowItems} autoPlay={true} />
+      </section>
+
       {/* Intro Section */}
-      <section className="px-2 sm:px-4">
+      <section className="px-2 sm:px-4 border-t border-gold/10 pt-8 sm:pt-12">
         <div className="max-w-3xl">
           <motion.h2 
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="text-2xl sm:text-4xl md:text-6xl font-serif leading-tight mb-6 sm:mb-8"
+            className="text-2xl sm:text-4xl md:text-5xl font-serif leading-tight mb-6 sm:mb-8"
           >
             Hi, I'm <span className="text-gold">Rafi</span> – software engineer, researcher, and creative problem solver.
           </motion.h2>

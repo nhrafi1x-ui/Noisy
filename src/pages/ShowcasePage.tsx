@@ -73,7 +73,7 @@ const ShowcasePage = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.4 }}
-          className="min-h-[60vh]"
+          className="min-h-[50vh]"
         >
           {activeTab === 'projects' && <ProjectsGrid />}
           {activeTab === 'research' && <ResearchList />}
