@@ -56,8 +56,11 @@
   }
 
   .custom-scrollbar {
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
     &::-webkit-scrollbar {
-      @apply w-1;
+      width: 4px;
+      height: 4px;
     }
     &::-webkit-scrollbar-track {
       @apply bg-charcoal/10;

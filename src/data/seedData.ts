@@ -1,6 +1,16 @@
 export const seedData = {
   projects: [
     {
+      id: 'proj-firee',
+      title: 'Firee',
+      description: 'A modern web application built and deployed with high efficiency, featuring dynamic interactive modules and real-time backend synchronization.',
+      imageUrl: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800',
+      techTags: ['React', 'TypeScript', 'Tailwind', 'Vercel'],
+      liveLink: 'https://firee.vercel.app',
+      repoLink: 'https://github.com/nhrafi0x/Firee',
+      featured: true
+    },
+    {
       id: 'proj1',
       title: 'Architectural Visualization Engine',
       description: 'A high-performance 3D rendering pipeline built with React and Three.js, focusing on minimalist interior designs.',

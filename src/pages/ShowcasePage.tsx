@@ -44,23 +44,25 @@ const ShowcasePage = () => {
       </header>
 
       {/* Tabs */}
-      <div className="flex gap-4 sm:gap-8 border-b border-gold/10 overflow-x-auto pb-3 custom-scrollbar whitespace-nowrap -mx-2 px-2 sm:mx-0 sm:px-0">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`group flex items-center gap-2.5 pb-3 transition-all duration-300 relative shrink-0 ${activeTab === tab.id ? 'text-gold' : 'text-charcoal/40 hover:text-charcoal'}`}
-          >
-            <tab.icon size={16} />
-            <span className="uppercase tracking-[0.2em] text-xs font-mono">{tab.label}</span>
-            {activeTab === tab.id && (
-              <motion.div 
-                layoutId="showcase-tab" 
-                className="absolute bottom-0 left-0 w-full h-0.5 bg-gold"
-              />
-            )}
-          </button>
-        ))}
+      <div className="w-full overflow-x-auto custom-scrollbar border-b border-gold/10 pb-1 touch-pan-x -mx-2 px-2 sm:mx-0 sm:px-0">
+        <div className="flex min-w-max gap-4 sm:gap-8 pb-2">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`group flex items-center gap-2 sm:gap-2.5 pb-3 transition-all duration-300 relative shrink-0 text-xs font-mono uppercase tracking-[0.15em] sm:tracking-[0.2em] cursor-pointer ${activeTab === tab.id ? 'text-gold' : 'text-charcoal/40 hover:text-charcoal'}`}
+            >
+              <tab.icon size={16} />
+              <span>{tab.label}</span>
+              {activeTab === tab.id && (
+                <motion.div 
+                  layoutId="showcase-tab" 
+                  className="absolute bottom-0 left-0 w-full h-0.5 bg-gold"
+                />
+              )}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Content */}
@@ -104,10 +106,20 @@ const ProjectsGrid = () => (
           <h3 className="text-xl sm:text-3xl font-serif leading-tight group-hover:text-gold transition-colors">{project.title}</h3>
           <p className="text-charcoal/60 leading-relaxed font-serif text-sm sm:text-base">{project.description}</p>
           <div className="flex flex-wrap gap-4 pt-2 sm:pt-4">
-            <a href={project.liveLink} className="text-gold flex items-center gap-2 text-xs sm:text-sm uppercase tracking-widest font-mono">
+            <a 
+              href={project.liveLink} 
+              target={project.liveLink.startsWith('http') ? '_blank' : undefined} 
+              rel={project.liveLink.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="text-gold flex items-center gap-2 text-xs sm:text-sm uppercase tracking-widest font-mono hover:underline"
+            >
               <ExternalLink size={16} /> Live Demo
             </a>
-            <a href={project.repoLink} className="text-charcoal/40 hover:text-charcoal flex items-center gap-2 text-xs sm:text-sm uppercase tracking-widest font-mono transition-colors">
+            <a 
+              href={project.repoLink} 
+              target={project.repoLink.startsWith('http') ? '_blank' : undefined} 
+              rel={project.repoLink.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="text-charcoal/40 hover:text-charcoal flex items-center gap-2 text-xs sm:text-sm uppercase tracking-widest font-mono transition-colors hover:underline"
+            >
               <Github size={16} /> Source
             </a>
           </div>

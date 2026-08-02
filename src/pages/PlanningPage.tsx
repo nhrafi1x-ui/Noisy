@@ -23,23 +23,25 @@ const PlanningPage = () => {
           <p className="text-charcoal/60 font-serif italic text-base sm:text-lg">Private dashboard for strategic personal management.</p>
         </div>
         
-        <div className="flex bg-white shadow-sm border border-gold/10 p-1 overflow-x-auto w-full md:w-auto custom-scrollbar">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
-              className={`flex items-center gap-2 px-3 sm:px-6 py-2 transition-all duration-300 relative shrink-0 ${activeTab === tab.id ? 'text-white' : 'text-charcoal/40 hover:text-charcoal'}`}
-            >
-              <tab.icon size={16} />
-              <span className="text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-mono font-bold z-10 whitespace-nowrap">{tab.label}</span>
-              {activeTab === tab.id && (
-                <motion.div 
-                  layoutId="planning-tab-bg" 
-                  className="absolute inset-0 bg-charcoal"
-                />
-              )}
-            </button>
-          ))}
+        <div className="w-full md:w-auto overflow-x-auto custom-scrollbar touch-pan-x">
+          <div className="flex min-w-max bg-white shadow-sm border border-gold/10 p-1">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`flex items-center gap-2 px-3 sm:px-6 py-2 transition-all duration-300 relative shrink-0 cursor-pointer ${activeTab === tab.id ? 'text-white' : 'text-charcoal/40 hover:text-charcoal'}`}
+              >
+                <tab.icon size={16} />
+                <span className="text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-mono font-bold z-10 whitespace-nowrap">{tab.label}</span>
+                {activeTab === tab.id && (
+                  <motion.div 
+                    layoutId="planning-tab-bg" 
+                    className="absolute inset-0 bg-charcoal"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
         </div>
       </header>
 
