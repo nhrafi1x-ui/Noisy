@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import NextPage from '../components/shared/NextPage';
 import SEO from '../components/shared/SEO';
-import portraitImg from '../assets/images/regenerated_image_1778779242183.jpg';
+import portraitImg from '../assets/images/portrait.jpg';
 
 const AboutPage = () => {
   const socialLinks = [
