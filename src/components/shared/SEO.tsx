@@ -17,9 +17,11 @@ const SEO: React.FC<SEOProps> = ({
   keywords = "Nazmul Haque Rafi, NH Rafi, Software Engineer, Researcher, AI, Architectural Visualization, Web Development, Portfolio",
   type = "website",
   image = "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1200",
-  canonical = window.location.href,
+  canonical,
   schemaData
 }) => {
+  const currentUrl = canonical || (typeof window !== 'undefined' ? window.location.href : '');
+  const currentHost = typeof window !== 'undefined' ? window.location.hostname : '';
   const fullTitle = `${title} | NH Rafi`;
   
   return (
@@ -28,10 +30,10 @@ const SEO: React.FC<SEOProps> = ({
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
-      <link rel="canonical" href={canonical} />
+      {currentUrl && <link rel="canonical" href={currentUrl} />}
 
       {/* Facebook Meta Tags */}
-      <meta property="og:url" content={canonical} />
+      {currentUrl && <meta property="og:url" content={currentUrl} />}
       <meta property="og:type" content={type} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
@@ -39,8 +41,8 @@ const SEO: React.FC<SEOProps> = ({
 
       {/* Twitter Meta Tags */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="twitter:domain" content={window.location.hostname} />
-      <meta property="twitter:url" content={canonical} />
+      {currentHost && <meta property="twitter:domain" content={currentHost} />}
+      {currentUrl && <meta property="twitter:url" content={currentUrl} />}
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />

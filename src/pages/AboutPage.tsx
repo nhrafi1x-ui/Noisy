@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import NextPage from '../components/shared/NextPage';
 import SEO from '../components/shared/SEO';
+import portraitImg from '../assets/images/regenerated_image_1778779242183.jpg';
 
 const AboutPage = () => {
   const socialLinks = [
@@ -88,7 +89,7 @@ const AboutPage = () => {
           <div className="absolute -inset-1.5 sm:-inset-2 border-2 border-gold/10 pointer-events-none" />
           <div className="bg-white p-3 sm:p-4 shadow-2xl relative white-box">
             <img 
-              src="/src/assets/images/regenerated_image_1778779242183.jpg" 
+              src={portraitImg} 
               alt="Portrait" 
               className="w-full aspect-[3/4] object-cover grayscale hover:grayscale-0 transition-all duration-700 bg-black cursor-pointer"
             />

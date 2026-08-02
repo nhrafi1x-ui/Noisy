@@ -28,12 +28,35 @@ const MyThinkingPage = () => {
 
   useEffect(() => {
     const path = 'posts';
-    const q = query(collection(db, path), orderBy('createdAt', 'desc'));
-    return onSnapshot(q, (snapshot) => {
-      setPosts(snapshot.docs.map(d => ({ id: d.id, ...d.data() } as Post)));
-    }, (error) => {
-      handleFirestoreError(error, OperationType.LIST, path);
-    });
+    let unsubscribe: () => void = () => {};
+    
+    try {
+      const q = query(collection(db, path), orderBy('createdAt', 'desc'));
+      unsubscribe = onSnapshot(q, (snapshot) => {
+        setPosts(snapshot.docs.map(d => ({ id: d.id, ...d.data() } as Post)));
+      }, (error) => {
+        console.warn('Ordered posts query failed, using simple collection listener:', error);
+        // Fallback to simple listener if orderBy fails
+        const fallbackUnsub = onSnapshot(collection(db, path), (snapshot) => {
+          const docs = snapshot.docs.map(d => ({ id: d.id, ...d.data() } as Post));
+          docs.sort((a, b) => {
+            const timeA = a.createdAt?.toMillis ? a.createdAt.toMillis() : (typeof a.createdAt === 'number' ? a.createdAt : 0);
+            const timeB = b.createdAt?.toMillis ? b.createdAt.toMillis() : (typeof b.createdAt === 'number' ? b.createdAt : 0);
+            return timeB - timeA;
+          });
+          setPosts(docs);
+        }, (err) => {
+          console.error('Firestore posts snapshot error:', err);
+        });
+        unsubscribe = fallbackUnsub;
+      });
+    } catch (err) {
+      console.error('Error setting up posts listener:', err);
+    }
+
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {

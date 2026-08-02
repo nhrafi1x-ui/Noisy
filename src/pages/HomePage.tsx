@@ -53,7 +53,7 @@ const HomePage = () => {
     "@type": "Person",
     "name": "Nazmul Haque Rafi",
     "alternateName": "NH Rafi",
-    "url": window.location.origin,
+    "url": typeof window !== 'undefined' ? window.location.origin : '',
     "jobTitle": "Software Engineer & Researcher",
     "description": "Software engineer, researcher, and creative problem solver specializing in scalable digital architectures and AI research.",
     "knowsAbout": ["Software Engineering", "AI Research", "3D Architectural Visualization", "Web Development"]

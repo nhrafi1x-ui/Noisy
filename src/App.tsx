@@ -12,38 +12,41 @@ import PlanningPage from './pages/PlanningPage';
 import NotFoundPage from './pages/NotFoundPage';
 import { ProtectedRoute } from './components/planning/ProtectedRoute';
 import ScrollToTop from './components/shared/ScrollToTop';
+import ErrorBoundary from './components/shared/ErrorBoundary';
 
 export default function App() {
   return (
-    <HelmetProvider>
-      <AuthProvider>
-        <Router>
-          <ScrollToTop />
-          <Helmet>
-            <title>Rafi | Software Engineer, Researcher & 3D Designer</title>
-            <meta name="description" content="Official portfolio of Nazmul Haque Rafi. Explore architectural visualizations, AI research, and high-performance web applications." />
-          </Helmet>
-          
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<HomePage />} />
-              <Route path="about" element={<AboutPage />} />
-              <Route path="contact" element={<ContactPage />} />
-              <Route path="showcase" element={<ShowcasePage />} />
-              <Route path="thinking" element={<MyThinkingPage />} />
-              <Route 
-                path="planning" 
-                element={
-                  <ProtectedRoute>
-                    <PlanningPage />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route path="*" element={<NotFoundPage />} />
-            </Route>
-          </Routes>
-        </Router>
-      </AuthProvider>
-    </HelmetProvider>
+    <ErrorBoundary>
+      <HelmetProvider>
+        <AuthProvider>
+          <Router>
+            <ScrollToTop />
+            <Helmet>
+              <title>Rafi | Software Engineer, Researcher & 3D Designer</title>
+              <meta name="description" content="Official portfolio of Nazmul Haque Rafi. Explore architectural visualizations, AI research, and high-performance web applications." />
+            </Helmet>
+            
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<HomePage />} />
+                <Route path="about" element={<AboutPage />} />
+                <Route path="contact" element={<ContactPage />} />
+                <Route path="showcase" element={<ShowcasePage />} />
+                <Route path="thinking" element={<MyThinkingPage />} />
+                <Route 
+                  path="planning" 
+                  element={
+                    <ProtectedRoute>
+                      <PlanningPage />
+                    </ProtectedRoute>
+                  } 
+                />
+                <Route path="*" element={<NotFoundPage />} />
+              </Route>
+            </Routes>
+          </Router>
+        </AuthProvider>
+      </HelmetProvider>
+    </ErrorBoundary>
   );
 }
