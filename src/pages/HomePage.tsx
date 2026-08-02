@@ -176,7 +176,6 @@ const HomePage = () => {
             </div>
             <h2 className="text-2xl sm:text-4xl font-serif">Featured Showcase</h2>
           </div>
-          <p className="text-xs font-mono text-charcoal/50 uppercase tracking-wider">Drag or click cards to rotate in 3D</p>
         </div>
 
         <Showcase3DSlideshow items={showcaseSlideshowItems} autoPlay={true} />

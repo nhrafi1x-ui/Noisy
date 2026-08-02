@@ -5,6 +5,7 @@ import { Cpu, Code2, Brain, Sparkles, Radio, Zap, X } from 'lucide-react';
 interface NothingLoadingScreenProps {
   onComplete?: () => void;
   forceShow?: boolean;
+  persistentMode?: boolean;
 }
 
 const PHASES = [
@@ -17,22 +18,31 @@ const PHASES = [
 export const NothingLoadingScreen: React.FC<NothingLoadingScreenProps> = ({
   onComplete,
   forceShow = false,
+  persistentMode = false,
 }) => {
   const [isVisible, setIsVisible] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const [currentPhaseIndex, setCurrentPhaseIndex] = useState(0);
+  const [progress, setProgress] = useState(persistentMode ? 100 : 0);
+  const [currentPhaseIndex, setCurrentPhaseIndex] = useState(persistentMode ? 3 : 0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   // Handle progress counter and phase sequence
   useEffect(() => {
+    if (persistentMode) {
+      setProgress(100);
+      setCurrentPhaseIndex(3);
+      return;
+    }
+
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(() => {
-            setIsVisible(false);
-            if (onComplete) onComplete();
-          }, 600);
+          if (!persistentMode) {
+            setTimeout(() => {
+              setIsVisible(false);
+              if (onComplete) onComplete();
+            }, 600);
+          }
           return 100;
         }
         const next = prev + Math.floor(Math.random() * 8) + 3;
@@ -48,7 +58,12 @@ export const NothingLoadingScreen: React.FC<NothingLoadingScreenProps> = ({
     }, 80);
 
     return () => clearInterval(interval);
-  }, [onComplete]);
+  }, [onComplete, persistentMode]);
+
+  const handleClose = () => {
+    setIsVisible(false);
+    if (onComplete) onComplete();
+  };
 
   // Track mouse for subtle 3D tilt effect on the Nothing device case
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -90,20 +105,20 @@ export const NothingLoadingScreen: React.FC<NothingLoadingScreenProps> = ({
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600 shadow-[0_0_8px_#ff0033]"></span>
             </span>
-            <span className="tracking-[0.25em] font-bold text-white uppercase">NOTHING (R) // OS 2.5</span>
+            <span className="tracking-[0.25em] font-bold text-white uppercase">NOTHING (R) // 2.5</span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <span className="hidden sm:inline-block tracking-widest text-white/40">LATENCY: 12ms</span>
             <span className="tracking-widest text-gold text-xs font-bold">{progress}%</span>
-            {forceShow && (
-              <button 
-                onClick={() => { setIsVisible(false); if (onComplete) onComplete(); }}
-                className="p-1 text-white/50 hover:text-white transition-colors cursor-pointer"
-              >
-                <X size={16} />
-              </button>
-            )}
+            <button 
+              onClick={handleClose}
+              title="Close 3D HUD"
+              className="flex items-center gap-1.5 px-3 py-1 bg-red-500/10 hover:bg-red-500/20 border border-red-500/40 text-red-400 hover:text-white rounded-full transition-all text-xs font-mono tracking-wider cursor-pointer shadow-[0_0_10px_rgba(239,68,68,0.2)]"
+            >
+              <span>EXIT HUD</span>
+              <X size={14} />
+            </button>
           </div>
         </header>
 

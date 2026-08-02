@@ -27,7 +27,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onTriggerLoader }) => {
         <div className="mb-12">
           <motion.button 
             onClick={onTriggerLoader}
-            title="Re-play Nothing OS 3D Loading Screen"
+            title="Re-play Nothing 3D Loading Screen"
             initial={{ rotate: -45 }}
             animate={{ rotate: 0 }}
             whileHover={{ scale: 1.1 }}
