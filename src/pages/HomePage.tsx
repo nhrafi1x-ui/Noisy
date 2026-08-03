@@ -176,7 +176,7 @@ const HomePage = () => {
             viewport={{ once: true }}
             className="text-2xl sm:text-4xl md:text-5xl font-serif leading-tight mb-8 sm:mb-10 text-center max-w-3xl"
           >
-            Hi, I'm <span className="text-gold">Rafi</span> – software engineer, researcher, and creative problem solver.
+            I'm <span className="text-gold">Rafi</span> – software engineer, researcher, and creative problem solver.
           </motion.h2>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -184,10 +184,10 @@ const HomePage = () => {
             viewport={{ once: true }}
             className="w-full grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-12 border-t border-gold/20 pt-8 sm:pt-10 text-center"
           >
-            <StatItem label="Projects" value="10+" />
-            <StatItem label="Research Papers" value="2" />
-            <StatItem label="Years Exp" value="4+" />
-            <StatItem label="Freelance Earnings" value="$600+" />
+            <StatItem label="Projects" value="5" />
+            <StatItem label="Research Papers" value="1" />
+            <StatItem label="Years Exp" value="1+" />
+            <StatItem label="Freelance Earnings" value="$1100+" />
           </motion.div>
         </div>
       </section>

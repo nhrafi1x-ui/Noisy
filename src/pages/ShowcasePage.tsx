@@ -198,30 +198,178 @@ const CookingCards = () => (
 );
 
 const FreelanceHistory = () => (
-  <div className="space-y-6 max-w-4xl">
-    {seedData.freelanceHistory.map((job) => (
-      <div key={job.id} className="flex flex-col md:flex-row gap-6 sm:gap-8 bg-white p-5 sm:p-8 items-center group white-box">
-        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gold/10 flex items-center justify-center text-gold font-serif text-2xl sm:text-3xl shrink-0">
-          {job.client.charAt(0)}
-        </div>
-        <div className="flex-1 space-y-2 text-center md:text-left">
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-4">
-            <h4 className="text-xl sm:text-2xl font-serif pr-4 border-r border-gold/20 leading-none">{job.client}</h4>
-            <Badge color="green">{job.badge}</Badge>
-            <div className="flex gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <span key={i} className={`text-sm ${i < job.rating ? 'text-gold' : 'text-charcoal/10'}`}>★</span>
-              ))}
+  <div className="max-w-6xl mx-auto space-y-6">
+    {/* Main Graphic Container with White Border on edge and rich drop shadow */}
+    <div className="bg-white p-2 sm:p-4 rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] border-[6px] sm:border-[12px] border-white transition-all duration-300 hover:shadow-[0_30px_70px_-10px_rgba(0,0,0,0.4)]">
+      <div className="bg-[#EAEAEA] rounded-2xl p-4 sm:p-8 md:p-12 grid lg:grid-cols-12 gap-8 items-center font-sans">
+        
+        {/* Left Side Typography */}
+        <div className="lg:col-span-5 space-y-6 sm:space-y-10 text-center lg:text-left py-2">
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[#2B2B2B] tracking-tight">
+            Portfolio
+          </h2>
+
+          <div className="space-y-4 sm:space-y-6">
+            <div className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight flex items-center justify-center lg:justify-start gap-1 sm:gap-2 flex-wrap">
+              <span className="text-[#1DBF73]">FIVERR-</span>
+              <span className="text-[#2B2B2B]">$600+</span>
+            </div>
+
+            <div className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight flex items-center justify-center lg:justify-start gap-1 sm:gap-2 flex-wrap">
+              <span className="text-[#14A800]">UPWORK-</span>
+              <span className="text-[#2B2B2B]">$400+</span>
             </div>
           </div>
-          <p className="text-charcoal/60 font-serif italic text-base sm:text-lg">{job.service}</p>
         </div>
-        <div className="text-center md:text-right">
-          <div className="text-xl sm:text-2xl font-serif text-gold">${job.earnings}</div>
-          <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-charcoal/30">{job.date}</div>
+
+        {/* Right Side UI Cards (Fiverr & Upwork Screenshots) */}
+        <div className="lg:col-span-7 space-y-4 sm:space-y-6">
+          
+          {/* Fiverr Earnings Card */}
+          <div className="bg-white rounded-xl shadow-md border border-gray-200/80 p-3 sm:p-5 text-gray-800 space-y-4 text-xs font-sans">
+            {/* Fiverr Top Nav */}
+            <div className="flex items-center justify-between border-b border-gray-100 pb-2.5 text-[10px] sm:text-xs">
+              <div className="flex items-center gap-3 sm:gap-5">
+                <span className="text-base sm:text-lg font-black tracking-tighter text-[#1DBF73] flex items-center">
+                  fiverr<span className="w-1.5 h-1.5 bg-[#1DBF73] rounded-full inline-block ml-0.5"></span>
+                </span>
+                <span className="hidden sm:inline font-semibold text-gray-700">Dashboard</span>
+                <span className="hidden sm:inline text-gray-500">My Business ▾</span>
+                <span className="hidden md:inline text-gray-500">Growth & Marketing ▾</span>
+                <span className="hidden lg:inline text-gray-500">Analytics ▾</span>
+              </div>
+              <div className="flex items-center gap-2 text-[10px] font-mono text-gray-500">
+                <span className="bg-gray-100 border border-gray-200 px-1.5 py-0.5 rounded text-gray-700 font-bold">$8</span>
+              </div>
+            </div>
+
+            {/* Earnings Section Header */}
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm sm:text-base font-bold text-gray-900">Earnings</h3>
+              <span className="text-[10px] text-gray-500 underline cursor-pointer">Learn more about this page</span>
+            </div>
+
+            <div className="flex gap-4 text-[11px] border-b border-gray-100 pb-1.5 text-gray-600 font-medium">
+              <span className="text-gray-900 font-bold border-b-2 border-gray-900 pb-1">Overview</span>
+              <span className="text-gray-400">Financial documents</span>
+            </div>
+
+            {/* Earnings Stats Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 text-[11px]">
+              {/* Col 1 */}
+              <div className="bg-gray-50/80 p-2.5 rounded-lg border border-gray-100 space-y-2">
+                <div className="text-[10px] font-medium text-gray-500">Available funds</div>
+                <div>
+                  <div className="text-[10px] text-gray-400">Balance available for use</div>
+                  <div className="text-lg font-bold text-gray-900">$8.00</div>
+                  <div className="text-[9px] text-gray-400 mt-0.5">Withdrawn to date: $680.00</div>
+                </div>
+                <div className="pt-1">
+                  <span className="inline-block bg-black text-white text-[10px] font-bold px-2.5 py-1 rounded shadow-sm">
+                    Withdraw balance
+                  </span>
+                </div>
+              </div>
+
+              {/* Col 2 */}
+              <div className="bg-gray-50/80 p-2.5 rounded-lg border border-gray-100 space-y-2">
+                <div className="text-[10px] font-medium text-gray-500">Future payments</div>
+                <div className="space-y-1.5 pt-1">
+                  <div>
+                    <div className="text-[9px] text-gray-400">Payments being cleared</div>
+                    <div className="text-sm font-bold text-gray-800">$0.00</div>
+                  </div>
+                  <div>
+                    <div className="text-[9px] text-gray-400">Payments for active orders</div>
+                    <div className="text-sm font-bold text-gray-800">$0.00</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Col 3 */}
+              <div className="bg-gray-50/80 p-2.5 rounded-lg border border-gray-100 space-y-2">
+                <div className="text-[10px] font-medium text-gray-500">Earnings & expenses</div>
+                <div className="pt-1">
+                  <div className="text-[9px] text-gray-400">Earnings to date</div>
+                  <div className="text-xl font-extrabold text-gray-900">$688.00</div>
+                  <div className="text-[9px] text-gray-400 italic">Your earnings since joining.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Upwork Profile Card */}
+          <div className="bg-white rounded-xl shadow-md border border-gray-200/80 p-3 sm:p-5 text-gray-800 space-y-4 text-xs font-sans">
+            {/* Upwork Top Nav */}
+            <div className="flex items-center justify-between border-b border-gray-100 pb-2.5 text-[10px] sm:text-xs">
+              <div className="flex items-center gap-3">
+                <span className="text-base sm:text-lg font-black tracking-tight text-[#14A800]">
+                  upwork
+                </span>
+                <span className="hidden sm:inline text-gray-500">Find work ▾</span>
+                <span className="hidden md:inline text-gray-500">Deliver work ▾</span>
+              </div>
+              <div className="bg-gray-100 border border-gray-200 rounded-full px-2.5 py-1 text-[10px] text-gray-500 hidden sm:block">
+                Search Jobs
+              </div>
+            </div>
+
+            {/* Profile Info */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-1">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center font-bold text-emerald-800 shrink-0 text-sm">
+                  NH
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-bold text-sm sm:text-base text-gray-900">Nazmul Haque R.</span>
+                    <span className="w-3.5 h-3.5 bg-[#14A800] text-white rounded-full flex items-center justify-center text-[8px] font-bold">✓</span>
+                  </div>
+                  <div className="text-[10px] text-gray-500">📍 Netrakona, Bangladesh</div>
+                </div>
+              </div>
+
+              <div className="flex gap-2 text-[10px]">
+                <span className="border border-[#14A800] text-[#14A800] font-bold px-2.5 py-1 rounded-lg">
+                  See public view
+                </span>
+                <span className="bg-[#14A800] text-white font-bold px-2.5 py-1 rounded-lg">
+                  Profile settings
+                </span>
+              </div>
+            </div>
+
+            {/* Job Title & Bio */}
+            <div className="bg-gray-50/80 p-3 rounded-lg border border-gray-100 space-y-2">
+              <div className="flex items-start justify-between gap-2">
+                <h4 className="font-bold text-gray-900 text-xs sm:text-sm">
+                  I'm a professional 3D Designer ( Home Interior, Game Character Design)
+                </h4>
+                <span className="text-xs font-bold text-emerald-700 shrink-0">$40.00/hr</span>
+              </div>
+              <p className="text-[11px] text-gray-600 line-clamp-2 leading-relaxed">
+                Hello, Welcome to my profile. I am a Graphic designer. I have 4 years of experience. I worked in many IT Farms as a Graphic Designer...
+              </p>
+            </div>
+
+            {/* Upwork Earnings Stats */}
+            <div className="flex items-center gap-6 pt-1 text-[11px] border-t border-gray-100">
+              <div>
+                <span className="font-extrabold text-gray-900 text-sm">$400+</span>
+                <span className="text-[10px] text-gray-500 block">Total earnings</span>
+              </div>
+              <div className="border-l border-gray-200 pl-6">
+                <span className="font-extrabold text-gray-900 text-sm">10</span>
+                <span className="text-[10px] text-gray-500 block">Total jobs</span>
+              </div>
+            </div>
+
+          </div>
+
         </div>
+
       </div>
-    ))}
+    </div>
   </div>
 );
 
