@@ -170,21 +170,21 @@ export const PortfolioChatbot: React.FC = () => {
   return (
     <>
       {/* Floating Launcher Button */}
-      <div className="fixed bottom-6 right-6 z-40">
+      <div className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-40">
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="relative flex items-center gap-2 bg-charcoal text-gold border border-gold/40 shadow-[0_10px_25px_rgba(0,0,0,0.5)] px-4 py-3 rounded-full cursor-pointer hover:bg-gold hover:text-charcoal transition-all duration-300 font-mono text-xs tracking-wider"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          title="Portfolio AI Assistant"
+          className="relative w-12 h-12 flex items-center justify-center bg-charcoal text-gold border border-gold/40 shadow-[0_10px_25px_rgba(0,0,0,0.6)] rounded-full cursor-pointer hover:bg-gold hover:text-charcoal transition-all duration-300"
         >
           <div className="relative">
-            <Bot size={18} />
-            <span className="absolute -top-1 -right-1 flex h-2 w-2">
+            <Bot size={20} />
+            <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-gold" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-gold border border-charcoal" />
             </span>
           </div>
-          <span className="font-bold hidden sm:inline">AI ASSISTANT</span>
         </motion.button>
       </div>
 
@@ -196,7 +196,7 @@ export const PortfolioChatbot: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed bottom-20 right-4 sm:right-6 z-50 w-[92vw] sm:w-[400px] h-[520px] max-h-[80vh] bg-charcoal/95 border border-gold/30 backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden font-sans text-white"
+            className="fixed bottom-[84px] sm:bottom-20 right-4 sm:right-6 z-50 w-[92vw] sm:w-[400px] h-[520px] max-h-[75vh] sm:max-h-[80vh] bg-charcoal/95 border border-gold/30 backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden font-sans text-white"
           >
             {/* Header */}
             <header className="p-4 border-b border-white/10 bg-black/40 flex items-center justify-between">

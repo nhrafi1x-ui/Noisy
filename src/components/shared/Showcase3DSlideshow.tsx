@@ -143,15 +143,15 @@ export const Showcase3DSlideshow: React.FC<Showcase3DSlideshowProps> = ({
                 }`}
               >
                 {/* Image Section */}
-                <div className="relative h-48 sm:h-56 overflow-hidden bg-black/40">
+                <div className="relative h-48 sm:h-56 overflow-hidden bg-black/20">
                   <img 
                     src={item.imageUrl} 
                     alt={item.title} 
                     className={`w-full h-full object-cover transition-transform duration-700 ${
-                      isActive ? 'scale-105' : 'scale-100 filter brightness-90'
+                      isActive ? 'scale-105' : 'scale-100 opacity-90'
                     }`}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent pointer-events-none" />
                   
                   {item.category && (
                     <div className="absolute top-3 left-3 z-10">

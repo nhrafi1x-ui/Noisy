@@ -52,22 +52,30 @@ const showcaseSlideshowItems: ShowcaseItem[] = [
     repoLink: p.repoLink,
     category: 'Project'
   })),
-  {
-    id: 'res-1',
-    title: seedData.research[0].title,
-    description: seedData.research[0].abstract,
-    imageUrl: 'https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&q=80&w=800',
-    techTags: ['AI Research', 'Optimization', 'Neural Nets'],
+  ...seedData.research.map(r => ({
+    id: r.id,
+    title: r.title,
+    description: r.abstract,
+    imageUrl: r.imageUrl,
+    techTags: ['AI Research', r.status, 'Optimization'],
     category: 'Research'
-  },
-  {
-    id: 'photo-1',
-    title: seedData.photography[0].title,
-    description: `Shot on ${seedData.photography[0].camera} • ${seedData.photography[0].settings}`,
-    imageUrl: seedData.photography[0].url,
-    techTags: ['Fujifilm', 'Street Photo'],
+  })),
+  ...seedData.photography.slice(0, 3).map(p => ({
+    id: p.id,
+    title: p.title,
+    description: `Shot on ${p.camera} • ${p.settings}`,
+    imageUrl: p.url,
+    techTags: [p.category, p.camera],
     category: 'Photography'
-  }
+  })),
+  ...seedData.cooking.map(c => ({
+    id: c.id,
+    title: c.title,
+    description: c.ingredients.join(' • '),
+    imageUrl: c.imageUrl,
+    techTags: ['Culinary Art', 'Chef Special'],
+    category: 'Cooking'
+  }))
 ];
 
 const HomePage = () => {

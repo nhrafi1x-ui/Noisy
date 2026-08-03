@@ -132,20 +132,34 @@ const ProjectsGrid = () => (
 const ResearchList = () => (
   <div className="space-y-6 sm:space-y-8 max-w-4xl">
     {seedData.research.map((item) => (
-      <div key={item.id} className="bg-white p-6 sm:p-12 shadow-sm border-l-4 border-gold relative group white-box">
-        <div className="sm:absolute top-6 sm:top-8 right-6 sm:right-8 mb-4 sm:mb-0">
-          <Badge>{item.status}</Badge>
+      <div key={item.id} className="bg-white p-6 sm:p-8 shadow-sm border-l-4 border-gold relative group white-box flex flex-col md:flex-row gap-6 items-start">
+        {item.imageUrl && (
+          <div className="w-full md:w-56 h-44 rounded-lg overflow-hidden shrink-0 border border-gold/20 shadow-md">
+            <img 
+              src={item.imageUrl} 
+              alt={item.title} 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+            />
+          </div>
+        )}
+        <div className="flex-1 space-y-3 w-full">
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <Badge>{item.status}</Badge>
+            <span className="text-charcoal/40 font-mono text-[10px] sm:text-xs uppercase tracking-widest">{item.date}</span>
+          </div>
+          <h3 className="text-xl sm:text-2xl font-serif leading-tight group-hover:text-gold transition-colors">{item.title}</h3>
+          <div className="text-charcoal/50 font-mono text-[10px] sm:text-xs uppercase tracking-widest">
+            {item.authors} • {item.journal}
+          </div>
+          <p className="text-charcoal/70 font-serif leading-relaxed line-clamp-3 text-xs sm:text-sm">
+            {item.abstract}
+          </p>
+          <div className="pt-2">
+            <GoldButton className="flex items-center gap-2 text-xs">
+              <FileText size={14} /> Download Paper
+            </GoldButton>
+          </div>
         </div>
-        <h3 className="text-xl sm:text-3xl font-serif mb-3 sm:mb-4 sm:pr-24 leading-tight group-hover:text-gold transition-colors">{item.title}</h3>
-        <div className="text-charcoal/40 font-mono text-[10px] sm:text-xs uppercase tracking-widest mb-4 sm:mb-6">
-          {item.authors} | {item.journal} | {item.date}
-        </div>
-        <p className="text-charcoal/70 font-serif leading-relaxed line-clamp-3 mb-6 sm:mb-8 text-sm sm:text-base">
-          {item.abstract}
-        </p>
-        <GoldButton className="flex items-center gap-2 text-xs sm:text-sm">
-          <FileText size={16} /> Download Paper
-        </GoldButton>
       </div>
     ))}
   </div>

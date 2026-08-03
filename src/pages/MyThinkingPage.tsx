@@ -193,15 +193,13 @@ const MyThinkingPage = () => {
                     </div>
                   </div>
 
-                  {post.imageUrl && (
-                    <div className="md:w-1/3 h-48 sm:h-64 md:h-auto overflow-hidden border border-gold/10 shrink-0">
-                      <img 
-                        src={post.imageUrl} 
-                        alt={post.title} 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                    </div>
-                  )}
+                  <div className="md:w-1/3 h-48 sm:h-64 md:h-auto overflow-hidden border border-gold/10 shrink-0">
+                    <img 
+                      src={post.imageUrl || 'https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&q=80&w=800'} 
+                      alt={post.title} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                  </div>
                 </div>
               </motion.article>
             ))}
