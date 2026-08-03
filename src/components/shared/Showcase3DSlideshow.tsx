@@ -114,7 +114,7 @@ export const Showcase3DSlideshow: React.FC<Showcase3DSlideshowProps> = ({
           return (
             <motion.div
               key={item.id}
-              className="absolute top-0 w-[85%] sm:w-[520px] h-[350px] sm:h-[400px] rounded-lg shadow-2xl cursor-pointer"
+              className="absolute top-0 w-[90%] sm:w-[520px] max-w-[360px] sm:max-w-none h-[360px] sm:h-[420px] rounded-lg shadow-2xl cursor-pointer"
               style={{
                 zIndex,
                 transformStyle: 'preserve-3d',
@@ -143,7 +143,7 @@ export const Showcase3DSlideshow: React.FC<Showcase3DSlideshowProps> = ({
                 }`}
               >
                 {/* Image Section */}
-                <div className="relative h-48 sm:h-56 overflow-hidden bg-black/20">
+                <div className="relative h-40 sm:h-56 shrink-0 overflow-hidden bg-black/20">
                   <img 
                     src={item.imageUrl} 
                     alt={item.title} 

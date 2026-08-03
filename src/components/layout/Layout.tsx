@@ -11,7 +11,7 @@ const Layout = () => {
   const [manualHudOpen, setManualHudOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex selection:bg-gold selection:text-white relative">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden flex selection:bg-gold selection:text-white relative">
       {/* Initial 3D Loading Screen */}
       {initialLoading && (
         <NothingLoadingScreen 
@@ -30,7 +30,7 @@ const Layout = () => {
 
       <Sidebar onTriggerLoader={() => setManualHudOpen(true)} />
 
-      <main className="flex-1 md:ml-20 mb-16 md:mb-0 relative">
+      <main className="flex-1 min-w-0 max-w-full overflow-x-hidden md:ml-20 mb-16 md:mb-0 relative">
         {/* Floating Nothing Glyph Control to open 3D HUD */}
         <button
           onClick={() => setManualHudOpen(true)}
