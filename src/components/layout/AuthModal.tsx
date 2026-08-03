@@ -18,10 +18,19 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
     try {
       setError(null);
       await signInWithGoogle();
-      // The restriction is handled in AuthContext, which will sign them out if unauthorized
       onClose();
-    } catch (err) {
-      setError('Failed to sign in. Please try again.');
+    } catch (err: any) {
+      console.error('Sign-in error in modal:', err);
+      if (err?.code === 'auth/unauthorized-domain') {
+        const domain = window.location.hostname;
+        setError(`Firebase Auth Domain Error: '${domain}' is not added to Authorized Domains in Firebase Console. (Firebase Console -> Auth -> Settings -> Authorized Domains)`);
+      } else if (err?.code === 'auth/popup-closed-by-user') {
+        setError('Sign-in popup was closed before completing authentication.');
+      } else if (err?.message) {
+        setError(err.message);
+      } else {
+        setError('Sign in failed. Please try again.');
+      }
     }
   };
 

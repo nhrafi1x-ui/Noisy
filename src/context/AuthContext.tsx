@@ -17,7 +17,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user && user.email !== 'nhrafi1x@gmail.com') {
+      if (user && user.email !== 'nhrafi1x@gmail.com' && user.email !== 'nhrafi.personal@gmail.com') {
         console.error('Unauthorized access attempt:', user.email);
         await signOut(auth);
         setUser(null);
@@ -31,9 +31,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signInWithGoogle = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      const result = await signInWithPopup(auth, googleProvider);
+      if (result.user && result.user.email !== 'nhrafi1x@gmail.com' && result.user.email !== 'nhrafi.personal@gmail.com') {
+        await signOut(auth);
+        setUser(null);
+        throw new Error('Access Restricted: Only Owner is authorized to access the private workspace.');
+      }
     } catch (error) {
       console.error('Google Sign In Error:', error);
+      throw error;
     }
   };
 

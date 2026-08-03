@@ -24,7 +24,7 @@ const MyThinkingPage = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isAdding, setIsAdding] = useState(false);
   const [formData, setFormData] = useState({ title: '', content: '', tags: '', imageUrl: '' });
-  const isOwner = user?.email === 'nhrafi1x@gmail.com';
+  const isOwner = user?.email === 'nhrafi1x@gmail.com' || user?.email === 'nhrafi.personal@gmail.com';
 
   useEffect(() => {
     const path = 'posts';

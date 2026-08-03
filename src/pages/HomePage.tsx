@@ -167,8 +167,33 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Middle Intro & Stats Section (Centered Alignment) */}
+      <section className="px-2 sm:px-4 border-y border-gold/15 py-10 sm:py-14 bg-charcoal/[0.02]">
+        <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+          <motion.h2 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl sm:text-4xl md:text-5xl font-serif leading-tight mb-8 sm:mb-10 text-center max-w-3xl"
+          >
+            Hi, I'm <span className="text-gold">Rafi</span> – software engineer, researcher, and creative problem solver.
+          </motion.h2>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="w-full grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-12 border-t border-gold/20 pt-8 sm:pt-10 text-center"
+          >
+            <StatItem label="Projects" value="10+" />
+            <StatItem label="Research Papers" value="2" />
+            <StatItem label="Years Exp" value="4+" />
+            <StatItem label="Freelance Earnings" value="$600+" />
+          </motion.div>
+        </div>
+      </section>
+
       {/* 3D Showcase Slideshow Section */}
-      <section className="space-y-4 px-1 sm:px-2 border-t border-gold/10 pt-8 sm:pt-12">
+      <section className="space-y-4 px-1 sm:px-2">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 px-2">
           <div>
             <div className="flex items-center gap-2 text-xs uppercase tracking-[0.4em] font-mono text-gold mb-1">
@@ -179,31 +204,6 @@ const HomePage = () => {
         </div>
 
         <Showcase3DSlideshow items={showcaseSlideshowItems} autoPlay={true} />
-      </section>
-
-      {/* Intro Section */}
-      <section className="px-2 sm:px-4 border-t border-gold/10 pt-8 sm:pt-12">
-        <div className="max-w-3xl">
-          <motion.h2 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl sm:text-4xl md:text-5xl font-serif leading-tight mb-6 sm:mb-8"
-          >
-            Hi, I'm <span className="text-gold">Rafi</span> – software engineer, researcher, and creative problem solver.
-          </motion.h2>
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-12 border-t border-gold/20 pt-8 sm:pt-12"
-          >
-            <StatItem label="Projects" value="10+" />
-            <StatItem label="Research Papers" value="2" />
-            <StatItem label="Years Exp" value="4+" />
-            <StatItem label="Freelance Earnings" value="$600+" />
-          </motion.div>
-        </div>
       </section>
 
       <NextPage to="/about" label="About Me" />

@@ -123,6 +123,19 @@ export const PortfolioChatbot: React.FC = () => {
       };
     }
 
+    if (q.includes('email') || q.includes('contact') || q.includes('touch') || q.includes('reach') || q.includes('message')) {
+      return {
+        id: `bot-${Date.now()}`,
+        sender: 'bot',
+        text: "You can reach NH Rafi directly via email at **nhrafi.personal@gmail.com** or send a message through the contact page.",
+        timestamp: time,
+        links: [
+          { label: '✉️ Send Message on Contact Page', url: '/contact', isExternal: false }
+        ],
+        suggestions: ['🔥 What is Firee?', '👤 Who is NH Rafi?', '🧭 Navigate the Site']
+      };
+    }
+
     if (q.includes('navigate') || q.includes('pages') || q.includes('section') || q.includes('where') || q.includes('site')) {
       return {
         id: `bot-${Date.now()}`,

@@ -19,7 +19,7 @@ const ContactPage = () => {
     "mainEntity": {
       "@type": "Person",
       "name": "Nazmul Haque Rafi",
-      "email": "nhrafi1x@gmail.com"
+      "email": "nhrafi.personal@gmail.com"
     }
   };
 
@@ -118,7 +118,7 @@ const ContactPage = () => {
           <ContactInfoCard 
             icon={Mail} 
             title="Email" 
-            content="nhrafi1x@gmail.com" 
+            content="nhrafi.personal@gmail.com" 
             sub="Expect a reply within 24 hours." 
           />
           <ContactInfoCard 
