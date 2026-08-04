@@ -51,9 +51,9 @@ export const socialLinks: SocialLinkItem[] = [
   {
     id: 'reddit',
     name: 'Reddit',
-    url: 'https://www.reddit.com/u/im_the_BUG',
+    url: 'https://www.reddit.com/u/im_the_BUG--',
     category: 'social',
-    username: 'u/im_the_BUG',
+    username: 'u/im_the_BUG--',
     iconName: 'MessageSquare'
   },
   {

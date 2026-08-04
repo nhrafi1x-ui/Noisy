@@ -135,7 +135,7 @@ export const PortfolioChatbot: React.FC = () => {
           { label: '🐦 X / Twitter', url: 'https://x.com/nhrafi1x', isExternal: true },
           { label: '📘 Facebook', url: 'https://www.facebook.com/nhrafi0x', isExternal: true },
           { label: '📸 Instagram', url: 'https://www.instagram.com/feeel_good.inc', isExternal: true },
-          { label: '👾 Reddit', url: 'https://www.reddit.com/u/im_the_BUG', isExternal: true },
+          { label: '👾 Reddit', url: 'https://www.reddit.com/u/im_the_BUG--', isExternal: true },
           { label: '🟢 Fiverr', url: 'https://fiverr.com/nh_rafi', isExternal: true },
           { label: '🟢 Upwork', url: 'https://www.upwork.com/freelancers/~0176868f526eee3201', isExternal: true },
           { label: '🎨 Dribbble', url: 'https://dribbble.com/nazmul-rafi', isExternal: true },
