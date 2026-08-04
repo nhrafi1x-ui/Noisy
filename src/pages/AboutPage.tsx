@@ -59,16 +59,54 @@ const AboutPage = () => {
             I am a Software Engineer and Researcher dedicated to bridging the gap between artistic vision and technical precision. My work spans from high-end 3D architectural design to rigorous machine learning research. With over four years of experience in creative problem-solving, I aim to create digital experiences that are as beautiful as they are functional.
           </p>
           <div className="mt-8 sm:mt-12 space-y-8 sm:space-y-12">
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <GoldButton className="flex items-center justify-center gap-2 px-6 py-3 text-xs uppercase tracking-widest font-bold w-full sm:w-auto">
-                <Download size={16} />
-                Download CV
-              </GoldButton>
-              <GoldButton className="flex items-center justify-center gap-2 px-6 py-3 text-xs uppercase tracking-widest font-bold w-full sm:w-auto">
-                <Download size={16} />
-                Download Resume
-              </GoldButton>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
+              <motion.a 
+                href="/CV_Md_Nazmul_Haque_Rafi.pdf"
+                download="CV_Md_Nazmul_Haque_Rafi.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                animate={{
+                  x: [0, -4, 4, -3, 3, 0],
+                  rotate: [0, -2, 2, -1.5, 1.5, 0],
+                  scale: [1, 1.03, 1.03, 1.03, 1]
+                }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="flex items-center justify-center gap-2 px-6 py-3.5 bg-gold text-white font-mono text-xs uppercase tracking-widest font-bold border border-gold hover:bg-gold/90 transition-all shadow-lg hover:shadow-gold/30 rounded-none cursor-pointer group"
+              >
+                <Download size={16} className="group-hover:translate-y-0.5 transition-transform" />
+                <span>Download CV (Academic)</span>
+              </motion.a>
+
+              <motion.a 
+                href="/Resume_Nazmul_Haque_Rafi.pdf"
+                download="Resume_Nazmul_Haque_Rafi.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                animate={{
+                  x: [0, 4, -4, 3, -3, 0],
+                  rotate: [0, 2, -2, 1.5, -1.5, 0],
+                  scale: [1, 1.03, 1.03, 1.03, 1]
+                }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.2
+                }}
+                className="flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-charcoal font-mono text-xs uppercase tracking-widest font-bold border border-gold hover:bg-gold hover:text-white transition-all shadow-md rounded-none cursor-pointer group white-box"
+              >
+                <Download size={16} className="text-gold group-hover:text-white group-hover:translate-y-0.5 transition-transform" />
+                <span>Download Resume (Tech)</span>
+              </motion.a>
             </div>
+
+            <p className="text-[11px] font-mono text-charcoal/50 italic">
+              * Direct PDF downloads hosted locally & compatible with Vercel / GitHub deployment.
+            </p>
 
             <div className="space-y-4 sm:space-y-6">
               <h4 className="text-xs uppercase tracking-[0.3em] font-mono text-charcoal/40">Social & Profiles</h4>
@@ -121,37 +159,43 @@ const AboutPage = () => {
         <SectionTitle title="Education" subtitle="My academic journey" />
         <div className="relative pl-8 space-y-12 before:absolute before:left-0 before:top-2 before:bottom-2 before:w-px before:bg-gold/30">
           <TimelineItem 
-            date="2019 - 2023"
-            title="B.Sc in Computer Science & Engineering"
-            institution="Premier University Chittagong"
-            description="Focused on Artificial Intelligence and Distributed Systems. Graduated with honors."
+            date="2023 - Present"
+            title="B.Sc in Software Engineering"
+            institution="Daffodil International University"
+            description="Focusing on Software Architecture, DevOps, Data Engineering, Machine Learning & Automation. Current SGPA: 3.75."
+          />
+          <TimelineItem 
+            date="2018 - 2020"
+            title="Higher Secondary School Certificate (HSC)"
+            institution="Netrakona Govt. College, Netrakona"
+            description="Science Group. Achieved GPA: 5.00 out of 5.00."
           />
           <TimelineItem 
             date="2016 - 2018"
-            title="Higher Secondary Certificate"
-            institution="Chittagong College"
-            description="Science major with a strong foundation in Mathematics and Physics."
+            title="Secondary School Certificate (SSC)"
+            institution="Anjuman Adarsha Govt. High School, Netrakona"
+            description="Science Group. Achieved GPA: 5.00 out of 5.00."
           />
         </div>
       </section>
 
       <section className="space-y-16">
-        <SectionTitle title="Achievements" subtitle="Honors & Awards" />
+        <SectionTitle title="Achievements & Research" subtitle="Honors & Community Leadership" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           <AchievementCard 
-            title="Best Research Award" 
-            award="IJAI Excellence 2023" 
-            description="Awarded for 'Optimization of Neural Networks for Low-Power Devices'." 
+            title="Best Research Proposal Award" 
+            award="DIU Research Society 2024" 
+            description="Awarded for outstanding proposal in the 'Meet the Researchers' program." 
           />
           <AchievementCard 
-            title="Organising Secretary" 
-            award="AI Symposium 2022" 
-            description="Led the organization of the regional AI conference with 500+ attendees." 
+            title="Accepted Research Publication" 
+            award="DIU Journal of Allied Health & Sciences" 
+            description="Titled 'Dengue Fever: A Persistent Public Health Challenge in Bangladesh'." 
           />
           <AchievementCard 
-            title="Level 2 Seller" 
-            award="Fiverr Freelance" 
-            description="Consistently rated 5 stars for high-end 3D interior design services." 
+            title="Organizing Secretary" 
+            award="DIU Research Society (2025 - Present)" 
+            description="Organized 10+ international seminars, workshops and guest lecture series." 
           />
         </div>
       </section>

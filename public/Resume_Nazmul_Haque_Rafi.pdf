@@ -1,0 +1,70 @@
+%PDF-1.4
+
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+
+2 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+
+3 0 obj
+<< /Type /Font /Subtype /Type1 /Name /F1 /BaseFont /Helvetica >>
+endobj
+
+4 0 obj
+<< /Type /Font /Subtype /Type1 /Name /F2 /BaseFont /Helvetica-Bold >>
+endobj
+
+5 0 obj
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /MediaBox [0 0 612 792] /Contents 6 0 R >>
+endobj
+
+6 0 obj
+<< /Length 1583 >>
+stream
+BT
+50 740 Td
+14 TL
+/F2 16 Tf (NAZMUL HAQUE RAFI - Software Engineer) Tj T* /F1 10 Tf
+(Dhaka, Bangladesh | +880 1641-014745 | nhrafi.business@gmail.com | linkedin.com/in/nhrafi0x) Tj T*
+T*
+T* /F2 12 Tf (PROFILE) Tj T* /F1 10 Tf
+(Passionate software engineering student with a strong interest in problem-solving, AI innovation, and) Tj T*
+(full-stack web development. Thrives in both collaborative environments and independent technical projects.) Tj T*
+T*
+T* /F2 12 Tf (EDUCATION) Tj T* /F1 10 Tf
+(• B.Sc in Software Engineering, Daffodil International University \(2023 - Present\)) Tj T*
+T*
+T* /F2 12 Tf (EXPERTISE & SKILLS) Tj T* /F1 10 Tf
+(• Programming: C, C++, Java, Python, Pandas, Numpy) Tj T*
+(• Web Development: HTML, CSS, JavaScript, React, Tailwind CSS, Frontend Engineering) Tj T*
+(• AI & ML: Generative AI Prompt Engineering, Python ML Libraries, Automation) Tj T*
+(• Creative & Marketing: Graphics Design, Digital Marketing, Team Leadership) Tj T*
+T*
+T* /F2 12 Tf (WORK & PROJECT EXPERIENCE) Tj T* /F1 10 Tf
+(• Web Development: Custom website design & frontend architecture \(e.g., Bunny Cakes\)) Tj T*
+(• Machine Learning & AI: Generative AI Prompt Specialist, Python data processing for research) Tj T*
+(• Extracurricular & Leadership: Organizing Secretary at DIU Research Society, Protocol Volunteer ICPC 2024 Regional) Tj T*
+T*
+T* /F2 12 Tf (REFERENCES) Tj T* /F1 10 Tf
+(• Dr. Imran Mahmud \(Professor & Head, Dept of SE, DIU\) - imranmahmud@daffodilvarsity.edu.bd) Tj T*
+(• Askar Ibn Azad \(Senior .NET Developer, Royex Tech Dubai\) - askar.ibn@gmail.com) Tj T*
+ET
+endstream
+endobj
+
+xref
+0 7
+0000000000 65535 f 
+0000000010 00000 n 
+0000000060 00000 n 
+0000000118 00000 n 
+0000000199 00000 n 
+0000000285 00000 n 
+0000000422 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+2058
+%%EOF
