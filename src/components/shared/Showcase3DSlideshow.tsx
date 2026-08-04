@@ -231,20 +231,25 @@ export const Showcase3DSlideshow: React.FC<Showcase3DSlideshowProps> = ({
           <ChevronLeft size={20} />
         </button>
 
-        {/* Indicators */}
+        {/* Indicators: 3 dots (Left, Middle Active, Right) */}
         <div className="flex items-center gap-2">
-          {items.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCurrentIndex(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
-              className={`h-2 rounded-full transition-all duration-500 cursor-pointer ${
-                currentIndex === idx 
-                  ? 'w-8 bg-gold' 
-                  : 'w-2 bg-charcoal/30 hover:bg-gold/50'
-              }`}
-            />
-          ))}
+          {/* Left dot */}
+          <button
+            onClick={handlePrev}
+            aria-label="Previous slide indicator"
+            className="h-2 w-2 rounded-full bg-charcoal/30 hover:bg-gold/50 transition-all duration-300 cursor-pointer"
+          />
+          {/* Middle dot (Visible / Active) */}
+          <button
+            aria-label={`Slide ${currentIndex + 1} visible`}
+            className="h-2 w-8 rounded-full bg-gold transition-all duration-500 cursor-default"
+          />
+          {/* Right dot */}
+          <button
+            onClick={handleNext}
+            aria-label="Next slide indicator"
+            className="h-2 w-2 rounded-full bg-charcoal/30 hover:bg-gold/50 transition-all duration-300 cursor-pointer"
+          />
         </div>
 
         <button
