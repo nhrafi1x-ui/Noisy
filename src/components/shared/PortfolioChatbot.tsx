@@ -123,6 +123,29 @@ export const PortfolioChatbot: React.FC = () => {
       };
     }
 
+    if (q.includes('social') || q.includes('github') || q.includes('linkedin') || q.includes('twitter') || q.includes('facebook') || q.includes('instagram') || q.includes('reddit') || q.includes('fiverr') || q.includes('upwork') || q.includes('dribbble') || q.includes('behance') || q.includes('gumroad')) {
+      return {
+        id: `bot-${Date.now()}`,
+        sender: 'bot',
+        text: "Here are all official social and professional profile links for NH Rafi:",
+        timestamp: time,
+        links: [
+          { label: '💻 GitHub', url: 'https://github.com/nhrafi0x', isExternal: true },
+          { label: '💼 LinkedIn', url: 'https://www.linkedin.com/in/nhrafi0x', isExternal: true },
+          { label: '🐦 X / Twitter', url: 'https://x.com/nhrafi1x', isExternal: true },
+          { label: '📘 Facebook', url: 'https://www.facebook.com/nhrafi0x', isExternal: true },
+          { label: '📸 Instagram', url: 'https://www.instagram.com/feeel_good.inc', isExternal: true },
+          { label: '👾 Reddit', url: 'https://www.reddit.com/u/im_the_BUG', isExternal: true },
+          { label: '🟢 Fiverr', url: 'https://fiverr.com/nh_rafi', isExternal: true },
+          { label: '🟢 Upwork', url: 'https://www.upwork.com/freelancers/~0176868f526eee3201', isExternal: true },
+          { label: '🎨 Dribbble', url: 'https://dribbble.com/nazmul-rafi', isExternal: true },
+          { label: '🎨 Behance', url: 'https://www.behance.net/nhrafi', isExternal: true },
+          { label: '🛍️ Gumroad', url: 'https://nhrafi.gumroad.com', isExternal: true }
+        ],
+        suggestions: ['🔥 What is Firee?', '👤 Who is NH Rafi?', '✉️ Contact NH Rafi']
+      };
+    }
+
     if (q.includes('email') || q.includes('contact') || q.includes('touch') || q.includes('reach') || q.includes('message')) {
       return {
         id: `bot-${Date.now()}`,

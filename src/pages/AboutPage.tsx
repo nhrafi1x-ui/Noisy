@@ -3,26 +3,29 @@ import { motion } from 'motion/react';
 import { GoldButton, Badge } from '../components/shared/UI';
 import { 
   Download, Github, Linkedin, Twitter, Instagram, 
-  Youtube, Dribbble, ExternalLink, Globe, Briefcase, 
-  ShoppingBag, Link as LinkIcon 
+  Facebook, MessageSquare, Dribbble, Globe, Briefcase, 
+  ShoppingBag, Palette, ExternalLink
 } from 'lucide-react';
 import NextPage from '../components/shared/NextPage';
 import SEO from '../components/shared/SEO';
 import portraitImg from '../assets/images/portrait.jpg';
+import { socialLinks } from '../data/socials';
+
+const iconMap: Record<string, any> = {
+  Github,
+  Linkedin,
+  Twitter,
+  Facebook,
+  Instagram,
+  MessageSquare,
+  Briefcase,
+  Globe,
+  Dribbble,
+  Palette,
+  ShoppingBag
+};
 
 const AboutPage = () => {
-  const socialLinks = [
-    { name: 'LinkedIn', icon: Linkedin, href: '#' },
-    { name: 'Instagram', icon: Instagram, href: '#' },
-    { name: 'YouTube', icon: Youtube, href: '#' },
-    { name: 'GitHub', icon: Github, href: '#' },
-    { name: 'Twitter', icon: Twitter, href: '#' },
-    { name: 'Fiverr', icon: Briefcase, href: '#' },
-    { name: 'Upwork', icon: Globe, href: '#' },
-    { name: 'Dribbble', icon: Dribbble, href: '#' },
-    { name: 'Gumroad', icon: ShoppingBag, href: '#' },
-  ];
-
   const aboutSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
@@ -68,11 +71,19 @@ const AboutPage = () => {
             </div>
 
             <div className="space-y-4 sm:space-y-6">
-              <h4 className="text-xs uppercase tracking-[0.3em] font-mono text-charcoal/40">Social Presence</h4>
+              <h4 className="text-xs uppercase tracking-[0.3em] font-mono text-charcoal/40">Social & Profiles</h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
-                {socialLinks.map((social) => (
-                  <SocialCard key={social.name} icon={social.icon} href={social.href} name={social.name} />
-                ))}
+                {socialLinks.map((social) => {
+                  const IconComponent = iconMap[social.iconName] || Globe;
+                  return (
+                    <SocialCard 
+                      key={social.id} 
+                      icon={IconComponent} 
+                      href={social.url} 
+                      name={social.name} 
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -161,13 +172,15 @@ const SectionTitle = ({ title, subtitle }: { title: string, subtitle: string }) 
 const SocialCard = ({ icon: Icon, href, name }: { icon: any, href: string, name: string }) => (
   <a 
     href={href} 
-    className="flex items-center gap-3 p-4 bg-white border border-charcoal/5 hover:border-gold transition-all duration-500 shadow-sm group/card white-box"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-3 p-3.5 bg-white border border-charcoal/5 hover:border-gold transition-all duration-300 shadow-sm group/card white-box"
     aria-label={name}
   >
-    <div className="text-charcoal/40 group-hover/card:text-gold transition-colors duration-300">
-      <Icon size={20} />
+    <div className="text-charcoal/40 group-hover/card:text-gold transition-colors duration-300 shrink-0">
+      <Icon size={18} />
     </div>
-    <span className="text-[10px] uppercase tracking-[0.2em] font-mono font-bold text-charcoal/60 group-hover/card:text-charcoal transition-colors duration-300">
+    <span className="text-[10px] uppercase tracking-[0.15em] font-mono font-bold text-charcoal/70 group-hover/card:text-charcoal transition-colors duration-300 truncate">
       {name}
     </span>
   </a>

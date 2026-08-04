@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Mail, MapPin, Clock, Share2, Send } from 'lucide-react';
+import { Mail, MapPin, Clock, Share2, Send, ExternalLink } from 'lucide-react';
 import { GoldButton, Badge } from '../components/shared/UI';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../firebase';
 import NextPage from '../components/shared/NextPage';
 import SEO from '../components/shared/SEO';
+import { socialLinks } from '../data/socials';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
@@ -135,13 +136,12 @@ const ContactPage = () => {
           />
           <div className="bg-white p-6 sm:p-8 border border-gold/10 white-box">
             <h4 className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] sm:tracking-[0.3em] text-charcoal/40 mb-4 sm:mb-6 flex items-center gap-3">
-              <Share2 size={14} /> Social Presence
+              <Share2 size={14} /> Official Socials & Profiles
             </h4>
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              <SocialLink name="LinkedIn" href="#" />
-              <SocialLink name="GitHub" href="#" />
-              <SocialLink name="Twitter" href="#" />
-              <SocialLink name="Fiverr" href="#" />
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+              {socialLinks.map((item) => (
+                <SocialLink key={item.id} name={item.name} href={item.url} username={item.username} />
+              ))}
             </div>
           </div>
         </div>
@@ -183,10 +183,18 @@ const ContactInfoCard = ({ icon: Icon, title, content, sub }: any) => (
   </div>
 );
 
-const SocialLink = ({ name, href }: { name: string, href: string }) => (
-  <a href={href} className="flex items-center justify-between p-4 border border-charcoal/5 hover:border-gold transition-colors group">
-    <span className="text-sm font-mono text-charcoal/60 group-hover:text-charcoal uppercase tracking-widest">{name}</span>
-    <ChevronRight size={14} className="text-gold opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+const SocialLink = ({ name, href, username }: { name: string, href: string, username?: string }) => (
+  <a 
+    href={href} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    className="flex items-center justify-between p-3 border border-charcoal/5 hover:border-gold transition-all duration-300 group white-box"
+  >
+    <div className="flex flex-col overflow-hidden pr-1">
+      <span className="text-xs font-mono text-charcoal/80 group-hover:text-charcoal uppercase tracking-wider font-semibold truncate">{name}</span>
+      {username && <span className="text-[10px] font-mono text-charcoal/40 truncate">{username}</span>}
+    </div>
+    <ChevronRight size={14} className="text-gold opacity-40 group-hover:opacity-100 transition-all -translate-x-1 group-hover:translate-x-0 shrink-0" />
   </a>
 );
 
