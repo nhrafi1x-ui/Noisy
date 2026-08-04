@@ -49,14 +49,6 @@ export const socialLinks: SocialLinkItem[] = [
     iconName: 'Instagram'
   },
   {
-    id: 'reddit',
-    name: 'Reddit',
-    url: 'https://www.reddit.com/u/im_the_BUG--',
-    category: 'social',
-    username: 'u/im_the_BUG--',
-    iconName: 'MessageSquare'
-  },
-  {
     id: 'fiverr',
     name: 'Fiverr',
     url: 'https://fiverr.com/nh_rafi',
