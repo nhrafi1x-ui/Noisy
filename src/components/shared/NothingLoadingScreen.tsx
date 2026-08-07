@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Cpu, Code2, Brain, Sparkles, Radio, Zap, X, Gamepad2, Layers } from 'lucide-react';
+import { Code2, Brain, Sparkles, Zap, X, Gamepad2, Layers, Clock, Timer, Calendar } from 'lucide-react';
 import { PixelMindQuest } from './PixelMindQuest';
 
 interface NothingLoadingScreenProps {
@@ -16,6 +16,36 @@ const PHASES = [
   { id: 'ready', label: 'SYSTEM READY [NH RAFI]', icon: Zap, code: '04 // INITIALIZED' },
 ];
 
+function calculateTimeLeft2027() {
+  const target = new Date(2027, 0, 1, 0, 0, 0);
+  const now = new Date();
+
+  if (now >= target) {
+    return { months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+
+  let months = (target.getFullYear() - now.getFullYear()) * 12 + (target.getMonth() - now.getMonth());
+  let checkDate = new Date(now.getFullYear(), now.getMonth() + months, now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds());
+  if (checkDate > target) {
+    months--;
+    checkDate = new Date(now.getFullYear(), now.getMonth() + months, now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds());
+  }
+
+  let diffMs = target.getTime() - checkDate.getTime();
+  if (diffMs < 0) diffMs = 0;
+
+  const secondsTotal = Math.floor(diffMs / 1000);
+  const minutesTotal = Math.floor(secondsTotal / 60);
+  const hoursTotal = Math.floor(minutesTotal / 60);
+  const days = Math.floor(hoursTotal / 24);
+
+  const hours = hoursTotal % 24;
+  const minutes = minutesTotal % 60;
+  const seconds = secondsTotal % 60;
+
+  return { months, days, hours, minutes, seconds };
+}
+
 export const NothingLoadingScreen: React.FC<NothingLoadingScreenProps> = ({
   onComplete,
   forceShow = false,
@@ -25,7 +55,16 @@ export const NothingLoadingScreen: React.FC<NothingLoadingScreenProps> = ({
   const [progress, setProgress] = useState(persistentMode ? 100 : 0);
   const [currentPhaseIndex, setCurrentPhaseIndex] = useState(persistentMode ? 3 : 0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [activeTab, setActiveTab] = useState<'hud' | 'game'>('hud');
+  const [activeTab, setActiveTab] = useState<'hud' | 'timer' | 'game'>('hud');
+  const [timerValues, setTimerValues] = useState(calculateTimeLeft2027());
+
+  // Update 2027 timer every second
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimerValues(calculateTimeLeft2027());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   // Handle progress counter and phase sequence
   useEffect(() => {
@@ -80,6 +119,14 @@ export const NothingLoadingScreen: React.FC<NothingLoadingScreenProps> = ({
 
   const currentPhase = PHASES[currentPhaseIndex];
 
+  const timerUnits = [
+    { label: 'Months', value: timerValues.months, unit: 'MOS' },
+    { label: 'Days', value: timerValues.days, unit: 'DAYS' },
+    { label: 'Hours', value: timerValues.hours, unit: 'HRS' },
+    { label: 'Minutes', value: timerValues.minutes, unit: 'MINS' },
+    { label: 'Seconds', value: timerValues.seconds, unit: 'SECS' },
+  ];
+
   return (
     <AnimatePresence>
       <motion.div
@@ -111,7 +158,7 @@ export const NothingLoadingScreen: React.FC<NothingLoadingScreenProps> = ({
           </div>
 
           {/* Mode Tabs */}
-          <div className="flex items-center bg-white/5 border border-white/15 rounded-full p-1 text-[11px]">
+          <div className="flex items-center bg-white/5 border border-white/15 rounded-full p-1 text-[11px] flex-wrap justify-center gap-1">
             <button
               onClick={() => setActiveTab('hud')}
               className={`px-3 py-1 rounded-full transition-all flex items-center gap-1.5 cursor-pointer font-bold ${
@@ -123,6 +170,20 @@ export const NothingLoadingScreen: React.FC<NothingLoadingScreenProps> = ({
               <Layers size={13} />
               <span>3D HUD</span>
             </button>
+
+            <button
+              onClick={() => setActiveTab('timer')}
+              className={`px-3 py-1 rounded-full transition-all flex items-center gap-1.5 cursor-pointer font-bold ${
+                activeTab === 'timer'
+                  ? 'bg-gold text-charcoal shadow-md'
+                  : 'text-white/80 hover:text-white'
+              }`}
+            >
+              <Timer size={13} />
+              <span>2027 TIMER</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-gold animate-ping" />
+            </button>
+
             <button
               onClick={() => setActiveTab('game')}
               className={`px-3 py-1 rounded-full transition-all flex items-center gap-1.5 cursor-pointer font-bold relative ${
@@ -155,14 +216,14 @@ export const NothingLoadingScreen: React.FC<NothingLoadingScreenProps> = ({
           /* Center 3D Floating Hardware Device (AirPods / Nothing Ear Translucent Pod) */
           <div className="relative my-auto py-6 flex flex-col items-center justify-center [perspective:1000px] z-10 w-full max-w-4xl">
             <motion.div
-              onClick={() => setActiveTab('game')}
+              onClick={() => setActiveTab('timer')}
               animate={{
                 rotateY: mousePos.x,
                 rotateX: mousePos.y,
               }}
               transition={{ type: 'spring', stiffness: 100, damping: 15 }}
               style={{ transformStyle: 'preserve-3d' }}
-              title="Click to start Pixel Mind Quest"
+              title="Click to view 2027 Countdown Timer"
               className="relative w-64 h-80 sm:w-72 sm:h-96 rounded-3xl p-6 flex flex-col justify-between border border-white/20 bg-white/5 backdrop-blur-xl shadow-[0_30px_70px_rgba(0,0,0,0.9)] group cursor-pointer hover:border-gold/50 hover:shadow-[0_30px_70px_rgba(212,175,55,0.25)] transition-colors"
             >
               {/* Inner Glass Contour Highlights */}
@@ -206,8 +267,6 @@ export const NothingLoadingScreen: React.FC<NothingLoadingScreenProps> = ({
                 <div className="w-4 h-1 bg-gold/80 rounded-full mb-1" />
                 <div className="w-2 h-2 rounded-full bg-red-600 shadow-[0_0_5px_#ff0000]" />
               </div>
-
-
             </motion.div>
 
             {/* Dynamic Nothing Dot-Matrix Phase Text */}
@@ -228,15 +287,91 @@ export const NothingLoadingScreen: React.FC<NothingLoadingScreenProps> = ({
                   <p className="text-xs text-white/50 tracking-widest uppercase">
                     INITIALIZING ARCHITECTURE // {progress}%
                   </p>
-                  <button
-                    onClick={() => setActiveTab('game')}
-                    className="mt-2 text-[11px] text-gold/80 hover:text-gold bg-gold/10 hover:bg-gold/20 border border-gold/30 px-3 py-1 rounded-full font-mono transition-all cursor-pointer inline-flex items-center gap-1.5"
-                  >
-                    <Gamepad2 size={12} />
-                    <span>[ CLICK HERE TO START GAME ]</span>
-                  </button>
+                  <div className="flex flex-wrap justify-center gap-2 mt-2">
+                    <button
+                      onClick={() => setActiveTab('timer')}
+                      className="text-[11px] text-gold/90 hover:text-gold bg-gold/10 hover:bg-gold/20 border border-gold/40 px-3 py-1 rounded-full font-mono transition-all cursor-pointer inline-flex items-center gap-1.5"
+                    >
+                      <Timer size={12} />
+                      <span>[ VIEW 2027 COUNTDOWN ]</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('game')}
+                      className="text-[11px] text-white/80 hover:text-white bg-white/10 hover:bg-white/20 border border-white/30 px-3 py-1 rounded-full font-mono transition-all cursor-pointer inline-flex items-center gap-1.5"
+                    >
+                      <Gamepad2 size={12} />
+                      <span>[ START QUEST GAME ]</span>
+                    </button>
+                  </div>
                 </motion.div>
               </AnimatePresence>
+            </div>
+          </div>
+        ) : activeTab === 'timer' ? (
+          /* Nothing OS 3D Countdown Mode */
+          <div className="w-full max-w-4xl my-auto py-6 z-10 flex flex-col items-center [perspective:1000px]">
+            {/* Header Badge inside 3D Timer */}
+            <div className="flex items-center gap-2 px-4 py-1.5 bg-white/10 border border-white/20 rounded-full text-gold text-xs font-mono tracking-[0.25em] mb-4 backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+              <span>NOTHING OS // 2027 MILESTONE</span>
+              <Calendar size={13} className="text-white/60" />
+            </div>
+
+            <h2 className="text-2xl sm:text-4xl font-serif text-white mb-2 tracking-tight text-center">
+              Target <span className="text-gold italic">January 1, 2027</span>
+            </h2>
+            <p className="text-xs font-mono text-white/50 mb-8 uppercase tracking-widest text-center">
+              [ REAL-TIME PRECISION DOT-MATRIX CHRONOMETER ]
+            </p>
+
+            {/* 3D Glassmorphism Cards Container */}
+            <motion.div
+              animate={{
+                rotateY: mousePos.x * 0.5,
+                rotateX: mousePos.y * 0.5,
+              }}
+              transition={{ type: 'spring', stiffness: 90, damping: 20 }}
+              style={{ transformStyle: 'preserve-3d' }}
+              className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 p-4 sm:p-6 bg-white/5 backdrop-blur-xl border border-white/15 rounded-3xl shadow-[0_30px_70px_rgba(0,0,0,0.8)]"
+            >
+              {timerUnits.map((item, idx) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: idx * 0.08 }}
+                  className="relative group bg-black/40 border border-white/15 hover:border-gold/80 p-4 sm:p-5 rounded-2xl flex flex-col items-center justify-between min-h-[130px] sm:min-h-[150px] shadow-lg transition-all duration-300 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)]"
+                >
+                  {/* Glowing LED top indicator */}
+                  <div className="flex items-center justify-between w-full text-[9px] font-mono text-white/40">
+                    <span className="text-gold font-bold">{item.unit}</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_4px_#ff0000]" />
+                  </div>
+
+                  {/* Number Display with dot-matrix look */}
+                  <div className="my-2 text-center">
+                    <span className="text-3xl sm:text-4xl md:text-5xl font-mono font-bold text-white group-hover:text-gold transition-colors tracking-tighter drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]">
+                      {String(item.value).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  {/* Label */}
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-white/60 group-hover:text-white transition-colors">
+                    {item.label}
+                  </span>
+
+                  {/* Corner Accent */}
+                  <div className="absolute bottom-1 right-1 opacity-20 group-hover:opacity-100 transition-opacity">
+                    <Clock size={10} className="text-gold" />
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Footnote inside Nothing Mode Timer */}
+            <div className="mt-8 flex items-center justify-center gap-3 text-[11px] font-mono text-white/40 bg-white/5 border border-white/10 px-4 py-2 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>SYSTEM CLOCK SYNCHRONIZED TO 2027 GOAL LINE</span>
             </div>
           </div>
         ) : (
@@ -248,12 +383,12 @@ export const NothingLoadingScreen: React.FC<NothingLoadingScreenProps> = ({
 
         {/* Nothing Bottom Grid Progress */}
         <footer className="w-full max-w-4xl flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-white/10 pt-3 z-10 text-xs shrink-0">
-          <div className="flex items-center gap-2 text-white/40 text-[10px] sm:text-xs">
+          <div className="flex items-center gap-2 text-white/40 text-[10px] sm:text-xs flex-wrap justify-center">
             <span>[AUTOMATION]</span>
             <span>•</span>
             <span>[CODING]</span>
             <span>•</span>
-            <span>[RESEARCH]</span>
+            <span>[2027 TIMER]</span>
             <span>•</span>
             <span>[PSYCHOLOGY GAME]</span>
           </div>
@@ -276,4 +411,5 @@ export const NothingLoadingScreen: React.FC<NothingLoadingScreenProps> = ({
     </AnimatePresence>
   );
 };
+
 
