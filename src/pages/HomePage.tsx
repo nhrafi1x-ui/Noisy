@@ -5,6 +5,7 @@ import { GoldButton, Badge } from '../components/shared/UI';
 import NextPage from '../components/shared/NextPage';
 import SEO from '../components/shared/SEO';
 import { Showcase3DSlideshow, ShowcaseItem } from '../components/shared/Showcase3DSlideshow';
+import { Countdown2027 } from '../components/shared/Countdown2027';
 import { seedData } from '../data/seedData';
 
 const slides = [
@@ -213,6 +214,9 @@ const HomePage = () => {
 
         <Showcase3DSlideshow items={showcaseSlideshowItems} autoPlay={true} />
       </section>
+
+      {/* 2027 Milestone 3D Countdown */}
+      <Countdown2027 />
 
       <NextPage to="/about" label="About Me" />
     </div>
