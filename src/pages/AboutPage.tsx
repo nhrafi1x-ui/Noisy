@@ -104,10 +104,6 @@ const AboutPage = () => {
               </motion.a>
             </div>
 
-            <p className="text-[11px] font-mono text-charcoal/50 italic">
-              * Direct PDF downloads hosted locally & compatible with Vercel / GitHub deployment.
-            </p>
-
             <div className="space-y-4 sm:space-y-6">
               <h4 className="text-xs uppercase tracking-[0.3em] font-mono text-charcoal/40">Social & Profiles</h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
